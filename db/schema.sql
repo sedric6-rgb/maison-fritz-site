@@ -1,0 +1,93 @@
+-- Schéma de base de données — Maison Fritz
+-- Compatible MySQL 8 / MariaDB 10.x (Railway "MySQL" plugin)
+
+CREATE TABLE IF NOT EXISTS agents (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(191) NOT NULL UNIQUE,
+  full_name VARCHAR(191) NOT NULL,
+  role VARCHAR(191) NOT NULL,
+  phone VARCHAR(64),
+  email VARCHAR(191),
+  city VARCHAR(191),
+  bio TEXT,
+  photo_url VARCHAR(512),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS properties (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(191) NOT NULL UNIQUE,
+  title VARCHAR(191) NOT NULL,
+  listing_type ENUM('vente','location') NOT NULL DEFAULT 'vente',
+  status ENUM('disponible','vendu','loue') NOT NULL DEFAULT 'disponible',
+  is_exclusive BOOLEAN NOT NULL DEFAULT FALSE,
+  is_newly_built BOOLEAN NOT NULL DEFAULT FALSE,
+  is_frontline_beach BOOLEAN NOT NULL DEFAULT FALSE,
+  featured BOOLEAN NOT NULL DEFAULT FALSE,
+  city VARCHAR(191) NOT NULL,
+  neighborhood VARCHAR(191),
+  price DECIMAL(14,2) NOT NULL,
+  bedrooms INT DEFAULT 0,
+  bathrooms INT DEFAULT 0,
+  surface_m2 INT DEFAULT 0,
+  description TEXT,
+  video_url VARCHAR(512),
+  agent_id INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (agent_id) REFERENCES agents(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS property_photos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  property_id INT NOT NULL,
+  url VARCHAR(512) NOT NULL,
+  position INT DEFAULT 0,
+  FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS blog_posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(191) NOT NULL UNIQUE,
+  title VARCHAR(191) NOT NULL,
+  excerpt VARCHAR(500),
+  content TEXT NOT NULL,
+  cover_image_url VARCHAR(512),
+  published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS job_listings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(191) NOT NULL UNIQUE,
+  title VARCHAR(191) NOT NULL,
+  city VARCHAR(191),
+  contract_type VARCHAR(191),
+  description TEXT,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS testimonials (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(191) NOT NULL,
+  rating INT NOT NULL DEFAULT 5,
+  message TEXT NOT NULL,
+  is_published BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS contact_leads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  lead_type ENUM('contact','property_inquiry','job_application','sell_with_us') NOT NULL,
+  name VARCHAR(191) NOT NULL,
+  phone VARCHAR(64),
+  email VARCHAR(191),
+  message TEXT,
+  property_id INT,
+  job_listing_id INT,
+  is_treated BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE SET NULL,
+  FOREIGN KEY (job_listing_id) REFERENCES job_listings(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
