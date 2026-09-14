@@ -91,3 +91,38 @@ CREATE TABLE IF NOT EXISTS contact_leads (
   FOREIGN KEY (property_id) REFERENCES properties(id) ON DELETE SET NULL,
   FOREIGN KEY (job_listing_id) REFERENCES job_listings(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS clients (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  full_name VARCHAR(191) NOT NULL,
+  phone VARCHAR(64),
+  email VARCHAR(191),
+  status ENUM('nouveau','contacte','qualifie','negociation','converti','perdu') NOT NULL DEFAULT 'nouveau',
+  source VARCHAR(191),
+  assigned_agent_id INT,
+  source_lead_id INT,
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (assigned_agent_id) REFERENCES agents(id) ON DELETE SET NULL,
+  FOREIGN KEY (source_lead_id) REFERENCES contact_leads(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS client_activities (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  client_id INT NOT NULL,
+  type ENUM('note','appel','email','rdv','autre') NOT NULL DEFAULT 'note',
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS client_followups (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  client_id INT NOT NULL,
+  due_date DATE NOT NULL,
+  note VARCHAR(500),
+  is_done BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

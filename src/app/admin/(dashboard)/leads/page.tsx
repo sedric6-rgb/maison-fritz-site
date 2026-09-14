@@ -1,5 +1,7 @@
 import { listLeads } from "@/lib/queries/leads";
 import { toggleLeadTreatedAction, deleteLeadAction } from "@/lib/actions/admin-leads";
+import { convertLeadToClientAction } from "@/lib/actions/admin-clients";
+import { getClientBySourceLeadId } from "@/lib/queries/crm";
 import { formatDate } from "@/lib/format";
 
 export const revalidate = 0;
@@ -13,13 +15,14 @@ const LABELS: Record<string, string> = {
 
 export default async function AdminLeadsPage() {
   const leads = await listLeads();
+  const linkedClients = await Promise.all(leads.map((lead) => getClientBySourceLeadId(lead.id)));
 
   return (
     <div>
       <h1 className="text-3xl">Demandes reçues</h1>
 
       <div className="mt-8 divide-y divide-line border-y border-line">
-        {leads.map((lead) => (
+        {leads.map((lead, i) => (
           <div key={lead.id} className="flex items-start justify-between gap-4 py-5">
             <div>
               <p className="font-semibold">
@@ -34,6 +37,18 @@ export default async function AdminLeadsPage() {
               {lead.message && <p className="mt-2 max-w-xl text-sm text-ink-soft">{lead.message}</p>}
             </div>
             <div className="flex shrink-0 flex-col items-end gap-2 text-sm">
+              {linkedClients[i] ? (
+                <a href={`/admin/clients/${linkedClients[i]!.id}/edit`} className="text-forest-deep underline">
+                  Voir la fiche client
+                </a>
+              ) : (
+                <form action={convertLeadToClientAction}>
+                  <input type="hidden" name="lead_id" value={lead.id} />
+                  <button type="submit" className="text-forest-deep underline">
+                    Créer une fiche client
+                  </button>
+                </form>
+              )}
               <form action={toggleLeadTreatedAction}>
                 <input type="hidden" name="id" value={lead.id} />
                 <input type="hidden" name="treated" value={lead.is_treated ? "" : "on"} />

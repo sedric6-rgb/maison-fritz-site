@@ -10,3 +10,11 @@ export function formatDate(value: string | Date): string {
     date
   );
 }
+
+/** Compare une date (string ou Date, telle que renvoyée par MySQL) au jour présent. */
+export function isOverdue(value: string | Date): boolean {
+  const date = typeof value === "string" ? new Date(value) : value;
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  return date.getTime() < startOfToday.getTime();
+}
