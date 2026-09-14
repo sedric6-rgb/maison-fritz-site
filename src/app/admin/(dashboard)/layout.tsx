@@ -17,13 +17,13 @@ const NAV = [
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto flex max-w-6xl gap-10 px-6 py-10 sm:px-8">
-      <aside className="w-56 shrink-0">
+    <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6 sm:px-8 md:flex-row md:gap-10 md:py-10">
+      <aside className="w-full shrink-0 md:w-56">
         <div className="font-display text-lg font-semibold text-forest-deep">
           Maison <span className="text-ochre">Fritz</span>
         </div>
         <p className="mb-6 text-xs text-ink-soft">Espace admin</p>
-        <nav className="flex flex-col gap-1 text-sm">
+        <nav className="flex flex-wrap gap-1 text-sm md:flex-col">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -34,16 +34,16 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
             </Link>
           ))}
         </nav>
-        <form action={logoutAction} className="mt-6">
+        <form action={logoutAction} className="mt-5">
           <button type="submit" className="text-sm text-terracotta underline">
             Se déconnecter
           </button>
         </form>
-        <Link href="/" className="mt-4 block text-sm text-ink-soft underline">
+        <Link href="/" className="mt-3 block text-sm text-ink-soft underline">
           ← Retour au site
         </Link>
       </aside>
-      <div className="flex-1 min-w-0">{children}</div>
+      <div className="min-w-0 flex-1">{children}</div>
     </div>
   );
 }

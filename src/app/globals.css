@@ -48,6 +48,12 @@
   border-color: var(--color-line);
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -60,6 +66,13 @@ html {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  img,
+  video,
+  iframe,
+  svg {
+    max-width: 100%;
   }
 
   main > section:first-child {
@@ -120,6 +133,7 @@ html {
     margin-inline: auto;
     max-width: var(--container);
     padding-inline: 1.5rem;
+    min-width: 0;
   }
 
   @media (min-width: 640px) {
@@ -132,6 +146,7 @@ html {
     margin-inline: auto;
     max-width: var(--container-text);
     padding-inline: 1.5rem;
+    min-width: 0;
   }
 
   @media (min-width: 640px) {

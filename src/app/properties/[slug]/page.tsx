@@ -74,7 +74,7 @@ export default async function PropertyDetailPage({
               {property.city}
             </p>
 
-            <div className="mt-10 grid grid-cols-3 gap-4 hairline border-b border-line py-7 text-center">
+            <div className="mt-10 grid grid-cols-3 gap-2 hairline border-b border-line py-7 text-center sm:gap-4">
               <div>
                 <div className="font-display text-2xl text-forest-deep">{property.bedrooms}</div>
                 <div className="mt-1 text-sm text-ink-soft">Chambres</div>
