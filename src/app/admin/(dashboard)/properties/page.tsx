@@ -23,7 +23,7 @@ export default async function AdminPropertiesPage() {
             <div>
               <p className="font-semibold">{p.title}</p>
               <p className="text-sm text-ink-soft">
-                {p.city} · {formatPrice(Number(p.price), p.listing_type)} · {p.status}
+                {p.city} · {formatPrice(Number(p.price), p.listing_type)} · {p.status} · {p.is_visible ? "En ligne" : "En pause"}
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-4 text-sm">

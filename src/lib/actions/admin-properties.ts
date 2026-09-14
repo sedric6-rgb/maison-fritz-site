@@ -23,6 +23,7 @@ function parseInput(formData: FormData): PropertyInput {
     status: (["disponible", "vendu", "loue"].includes(String(formData.get("status")))
       ? formData.get("status")
       : "disponible") as PropertyInput["status"],
+    is_visible: formData.get("is_visible") === "on",
     is_exclusive: formData.get("is_exclusive") === "on",
     is_newly_built: formData.get("is_newly_built") === "on",
     is_frontline_beach: formData.get("is_frontline_beach") === "on",

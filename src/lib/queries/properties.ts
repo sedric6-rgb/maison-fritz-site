@@ -8,6 +8,7 @@ export type Property = {
   title: string;
   listing_type: "vente" | "location";
   status: "disponible" | "vendu" | "loue";
+  is_visible: boolean;
   is_exclusive: boolean;
   is_newly_built: boolean;
   is_frontline_beach: boolean;
@@ -42,7 +43,7 @@ export async function listProperties(filters: PropertyFilters = {}): Promise<Pro
   const params: (string | number)[] = [];
 
   if (!filters.includeSold) {
-    where.push("status = 'disponible'");
+    where.push("status = 'disponible' AND is_visible = TRUE");
   }
   if (filters.tag === "exclusive") where.push("is_exclusive = TRUE");
   if (filters.tag === "newly_built") where.push("is_newly_built = TRUE");
@@ -78,7 +79,7 @@ export async function listProperties(filters: PropertyFilters = {}): Promise<Pro
 
 export async function getFeaturedProperty(): Promise<Property | null> {
   const [rows] = await db.query<RowDataPacket[]>(
-    `SELECT * FROM properties WHERE featured = TRUE AND status = 'disponible' ORDER BY created_at DESC LIMIT 1`
+    `SELECT * FROM properties WHERE featured = TRUE AND status = 'disponible' AND is_visible = TRUE ORDER BY created_at DESC LIMIT 1`
   );
   return (rows[0] as Property) ?? null;
 }
@@ -92,7 +93,7 @@ export async function listSoldProperties(limit = 6): Promise<Property[]> {
 }
 
 export async function getPropertyBySlug(slug: string): Promise<Property | null> {
-  const [rows] = await db.query<RowDataPacket[]>(`SELECT * FROM properties WHERE slug = ?`, [
+  const [rows] = await db.query<RowDataPacket[]>(`SELECT * FROM properties WHERE slug = ? AND is_visible = TRUE`, [
     slug,
   ]);
   return (rows[0] as Property) ?? null;
@@ -122,6 +123,7 @@ export type PropertyInput = {
   title: string;
   listing_type: "vente" | "location";
   status: "disponible" | "vendu" | "loue";
+  is_visible: boolean;
   is_exclusive: boolean;
   is_newly_built: boolean;
   is_frontline_beach: boolean;
@@ -142,15 +144,16 @@ export async function createProperty(input: PropertyInput): Promise<number> {
   const slug = await uniqueSlug(input.title, slugExists);
   const [result] = await db.query<ResultSetHeader>(
     `INSERT INTO properties
-      (slug, title, listing_type, status, is_exclusive, is_newly_built, is_frontline_beach,
+      (slug, title, listing_type, status, is_visible, is_exclusive, is_newly_built, is_frontline_beach,
        featured, city, neighborhood, price, bedrooms, bathrooms, surface_m2, description,
        video_url, agent_id)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     [
       slug,
       input.title,
       input.listing_type,
       input.status,
+      input.is_visible,
       input.is_exclusive,
       input.is_newly_built,
       input.is_frontline_beach,
@@ -182,7 +185,7 @@ export async function updateProperty(id: number, input: PropertyInput): Promise<
 
   await db.query(
     `UPDATE properties SET
-      slug=?, title=?, listing_type=?, status=?, is_exclusive=?, is_newly_built=?,
+      slug=?, title=?, listing_type=?, status=?, is_visible=?, is_exclusive=?, is_newly_built=?,
       is_frontline_beach=?, featured=?, city=?, neighborhood=?, price=?, bedrooms=?,
       bathrooms=?, surface_m2=?, description=?, video_url=?, agent_id=?
      WHERE id=?`,
@@ -191,6 +194,7 @@ export async function updateProperty(id: number, input: PropertyInput): Promise<
       input.title,
       input.listing_type,
       input.status,
+      input.is_visible,
       input.is_exclusive,
       input.is_newly_built,
       input.is_frontline_beach,
@@ -224,7 +228,7 @@ export async function deleteProperty(id: number): Promise<void> {
 
 export async function listPropertiesByAgent(agentId: number): Promise<Property[]> {
   const [rows] = await db.query<RowDataPacket[]>(
-    `SELECT * FROM properties WHERE agent_id = ? AND status = 'disponible' ORDER BY created_at DESC`,
+    `SELECT * FROM properties WHERE agent_id = ? AND status = 'disponible' AND is_visible = TRUE ORDER BY created_at DESC`,
     [agentId]
   );
   return rows as Property[];
@@ -233,7 +237,7 @@ export async function listPropertiesByAgent(agentId: number): Promise<Property[]
 export async function listSimilarProperties(property: Property, limit = 3): Promise<Property[]> {
   const [rows] = await db.query<RowDataPacket[]>(
     `SELECT * FROM properties
-     WHERE id <> ? AND status = 'disponible'
+     WHERE id <> ? AND status = 'disponible' AND is_visible = TRUE
        AND (city = ? OR listing_type = ?)
      ORDER BY (city = ?) DESC, (listing_type = ?) DESC, featured DESC, created_at DESC
      LIMIT ?`,

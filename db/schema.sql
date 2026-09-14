@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS properties (
   title VARCHAR(191) NOT NULL,
   listing_type ENUM('vente','location') NOT NULL DEFAULT 'vente',
   status ENUM('disponible','vendu','loue') NOT NULL DEFAULT 'disponible',
+  is_visible BOOLEAN NOT NULL DEFAULT TRUE,
   is_exclusive BOOLEAN NOT NULL DEFAULT FALSE,
   is_newly_built BOOLEAN NOT NULL DEFAULT FALSE,
   is_frontline_beach BOOLEAN NOT NULL DEFAULT FALSE,

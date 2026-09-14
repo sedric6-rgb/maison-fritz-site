@@ -100,6 +100,9 @@ export function PropertyForm({
 
       <div className="flex flex-wrap gap-6 sm:col-span-2">
         <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" name="is_visible" defaultChecked={property?.is_visible ?? true} /> Afficher cette annonce sur le site
+        </label>
+        <label className="flex items-center gap-2 text-sm">
           <input type="checkbox" name="is_exclusive" defaultChecked={property?.is_exclusive} /> Exclusive
         </label>
         <label className="flex items-center gap-2 text-sm">

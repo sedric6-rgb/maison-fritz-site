@@ -42,6 +42,7 @@ export function AgentForm({
           name="photo_url"
           label="Photo de l’agent"
           initialUrls={agent?.photo_url ? [agent.photo_url] : []}
+          aspectRatio={3 / 4}
         />
       </div>
 
