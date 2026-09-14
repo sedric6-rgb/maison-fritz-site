@@ -9,7 +9,10 @@ import mysql from "mysql2/promise";
 
 async function getConnection() {
   const url = process.env.DATABASE_URL;
-  if (url) return mysql.createConnection(url);
+  if (url) {
+    const separator = url.includes("?") ? "&" : "?";
+    return mysql.createConnection(url + separator + "multipleStatements=true");
+  }
   return mysql.createConnection({
     host: process.env.MYSQLHOST || "localhost",
     port: Number(process.env.MYSQLPORT) || 3306,

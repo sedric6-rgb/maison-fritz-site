@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
-import { getPropertyBySlug, getPropertyPhotos } from "@/lib/queries/properties";
+import { getPropertyBySlug, getPropertyPhotos, listSimilarProperties } from "@/lib/queries/properties";
 import { getAgentById } from "@/lib/queries/agents";
 import { formatPrice } from "@/lib/format";
 import { submitPropertyInquiry } from "@/lib/actions/leads";
+import { PropertyCard } from "@/components/PropertyCard";
 
 export const revalidate = 0;
 
@@ -23,10 +24,12 @@ export default async function PropertyDetailPage({
   const property = await getPropertyBySlug(slug);
   if (!property) notFound();
 
-  const [photos, agent] = await Promise.all([
+  const [photos, agent, similar] = await Promise.all([
     getPropertyPhotos(property.id),
     property.agent_id ? getAgentById(property.agent_id) : Promise.resolve(null),
+    listSimilarProperties(property),
   ]);
+  const similarPhotos = await Promise.all(similar.map((item) => getPropertyPhotos(item.id)));
 
   const embedUrl = property.video_url ? youtubeEmbedUrl(property.video_url) : null;
 
@@ -113,6 +116,14 @@ export default async function PropertyDetailPage({
                   <p className="text-sm text-ink-soft">Agent en charge</p>
                   <p className="mt-1 font-display text-lg text-forest-deep">{agent.full_name}</p>
                   {agent.phone && <p className="mt-1 text-sm text-ink-soft">{agent.phone}</p>}
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {agent.phone && (
+                      <a href={`tel:${agent.phone.replace(/\s/g, "")}`} className="text-sm text-forest-deep underline">Appeler</a>
+                    )}
+                    {agent.phone && (
+                      <a href={`https://wa.me/${agent.phone.replace(/\D/g, "")}?text=${encodeURIComponent(`Bonjour, je souhaite en savoir plus sur ${property.title}.`)}`} className="text-sm text-forest-deep underline">WhatsApp</a>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -151,6 +162,18 @@ export default async function PropertyDetailPage({
             </div>
           </div>
         </div>
+
+        {similar.length > 0 && (
+          <section className="mt-24 border-t border-line pt-16 sm:mt-32 sm:pt-20">
+            <p className="eyebrow">À découvrir aussi</p>
+            <h2 className="mt-4">Propriétés similaires</h2>
+            <div className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+              {similar.map((item, index) => (
+                <PropertyCard key={item.id} property={item} coverUrl={similarPhotos[index][0]?.url} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </section>
   );

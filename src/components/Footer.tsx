@@ -3,12 +3,14 @@ import Image from "next/image";
 
 const NAV_COLUMN: { href: string; label: string }[] = [
   { href: "/properties", label: "Propriétés" },
-  { href: "/team", label: "Team" },
+  { href: "/#collections", label: "Collections" },
+  { href: "/team", label: "Équipe" },
   { href: "/about", label: "À propos" },
   { href: "/guides", label: "Guides" },
   { href: "/blog", label: "Blog" },
   { href: "/careers", label: "Carrières" },
   { href: "/contact", label: "Contact" },
+  { href: "/about#sell-with-us", label: "Confier un bien" },
 ];
 
 export function Footer() {
@@ -42,9 +44,7 @@ export function Footer() {
           <a href="mailto:contact@maisonfritz.com" className="mt-2 block text-forest-deep underline">
             contact@maisonfritz.com
           </a>
-          <Link href="/about#sell-with-us" className="mt-4 block hover:text-forest-deep">
-            Rejoindre le réseau
-          </Link>
+          <a href="tel:+242060000000" className="mt-2 block hover:text-forest-deep">+242 06 000 00 00</a>
         </div>
       </div>
       <div className="hairline">

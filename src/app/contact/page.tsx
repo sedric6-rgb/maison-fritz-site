@@ -19,6 +19,7 @@ export default async function ContactPage({
           </p>
           <div className="mt-10 space-y-1 text-sm text-ink-soft">
             <p className="text-ink">Pointe-Noire · Brazzaville · Congo</p>
+            <a href="tel:+242060000000" className="block text-forest-deep underline">+242 06 000 00 00</a>
             <a href="mailto:contact@maisonfritz.com" className="text-forest-deep underline">
               contact@maisonfritz.com
             </a>
@@ -48,6 +49,17 @@ export default async function ContactPage({
               <div>
                 <label className="field-label" htmlFor="email">Email</label>
                 <input id="email" name="email" type="email" className="field-input" />
+              </div>
+              <div>
+                <label className="field-label" htmlFor="project">Votre projet</label>
+                <select id="project" name="project" className="field-input" defaultValue="">
+                  <option value="">Choisir</option>
+                  <option value="visite">Demande de visite</option>
+                  <option value="estimation">Demande d&apos;estimation</option>
+                  <option value="vente">Vendre un bien</option>
+                  <option value="location">Mettre un bien en location</option>
+                  <option value="achat">Acheter un bien</option>
+                </select>
               </div>
               <div>
                 <label className="field-label" htmlFor="message">Message</label>

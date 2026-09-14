@@ -230,6 +230,18 @@ export async function listPropertiesByAgent(agentId: number): Promise<Property[]
   return rows as Property[];
 }
 
+export async function listSimilarProperties(property: Property, limit = 3): Promise<Property[]> {
+  const [rows] = await db.query<RowDataPacket[]>(
+    `SELECT * FROM properties
+     WHERE id <> ? AND status = 'disponible'
+       AND (city = ? OR listing_type = ?)
+     ORDER BY (city = ?) DESC, (listing_type = ?) DESC, featured DESC, created_at DESC
+     LIMIT ?`,
+    [property.id, property.city, property.listing_type, property.city, property.listing_type, limit]
+  );
+  return rows as Property[];
+}
+
 export async function listDistinctCities(): Promise<string[]> {
   const [rows] = await db.query<RowDataPacket[]>(
     `SELECT DISTINCT city FROM properties ORDER BY city ASC`

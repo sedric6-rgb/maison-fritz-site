@@ -12,7 +12,9 @@ export async function submitContactForm(formData: FormData): Promise<void> {
   const name = str(formData, "name");
   const phone = str(formData, "phone");
   const email = str(formData, "email");
-  const message = str(formData, "message");
+  const project = str(formData, "project");
+  const rawMessage = str(formData, "message");
+  const message = project ? `Projet : ${project}\n\n${rawMessage}`.trim() : rawMessage;
 
   if (!name || (!phone && !email)) {
     redirect("/contact?error=1");

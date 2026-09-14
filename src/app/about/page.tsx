@@ -129,14 +129,14 @@ export default async function AboutPage({
           <div id="sell-with-us" className="scroll-mt-24 border border-line bg-paper p-8 sm:p-10">
             <h2>Sell with us</h2>
             <p className="mt-5 max-w-xl text-ink-soft">
-              Vous êtes déjà agent immobilier ? Rejoignez le réseau Maison Fritz : mandats
-              standardisés, formation continue, redevance de réseau sans frais de démarrage
-              caché.
+              Vous souhaitez vendre, louer ou faire gérer votre propriété ? Confiez-nous votre
+              bien pour une estimation confidentielle, une présentation soignée et un suivi
+              transparent jusqu&apos;à la signature.
             </p>
 
             {sent ? (
               <p className="mt-7 max-w-md bg-forest/10 p-4 text-sm text-forest-deep">
-                Votre candidature a bien été envoyée. Nous revenons vers vous rapidement.
+                Votre demande a bien été envoyée. Nous revenons vers vous rapidement.
               </p>
             ) : (
               <form action={submitSellWithUs} className="mt-7 grid max-w-xl gap-4 sm:grid-cols-2">
@@ -158,11 +158,11 @@ export default async function AboutPage({
                   <input id="sw-email" name="email" type="email" className="field-input" />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="field-label" htmlFor="sw-message">Votre expérience</label>
+                  <label className="field-label" htmlFor="sw-message">Parlez-nous de votre bien</label>
                   <textarea id="sw-message" name="message" rows={3} className="field-input" />
                 </div>
                 <div className="sm:col-span-2">
-                  <button type="submit" className="btn btn-primary">Rejoindre le réseau</button>
+                  <button type="submit" className="btn btn-primary">Demander une estimation</button>
                 </div>
               </form>
             )}

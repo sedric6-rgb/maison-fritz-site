@@ -85,7 +85,7 @@ export default async function HomePage() {
               "linear-gradient(180deg, rgba(14,33,28,0.55) 0%, rgba(14,33,28,0.35) 40%, rgba(14,33,28,0.92) 100%)",
           }}
         />
-        <div className="wrap relative z-10 w-full pb-16 pt-40 text-paper sm:pb-24">
+        <div className="wrap relative z-10 w-full pb-10 pt-40 text-paper sm:pb-16">
           <p className="text-sm text-paper/70">Pointe-Noire · Brazzaville · Congo</p>
           <h1 className="mt-5 max-w-3xl text-paper">L&apos;immobilier d&apos;exception au Congo</h1>
           <p className="mt-6 max-w-lg text-lg text-paper/85">
@@ -100,6 +100,30 @@ export default async function HomePage() {
               Confier mon bien
             </Link>
           </div>
+          <form
+            action="/properties"
+            className="mt-10 grid max-w-5xl gap-px bg-white/20 p-px backdrop-blur-md sm:grid-cols-[1fr_1fr_auto]"
+          >
+            <label className="bg-paper/95 px-5 py-3 text-ink">
+              <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink-faint">Ville</span>
+              <select name="city" defaultValue="" className="mt-1 w-full bg-transparent text-sm outline-none">
+                <option value="">Pointe-Noire ou Brazzaville</option>
+                <option value="Pointe-Noire">Pointe-Noire</option>
+                <option value="Brazzaville">Brazzaville</option>
+              </select>
+            </label>
+            <label className="bg-paper/95 px-5 py-3 text-ink">
+              <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ink-faint">Projet</span>
+              <select name="listingType" defaultValue="" className="mt-1 w-full bg-transparent text-sm outline-none">
+                <option value="">Acheter ou louer</option>
+                <option value="vente">Acheter</option>
+                <option value="location">Louer</option>
+              </select>
+            </label>
+            <button className="bg-ochre px-8 py-4 text-sm font-semibold text-paper transition-colors hover:bg-forest" type="submit">
+              Rechercher
+            </button>
+          </form>
         </div>
       </section>
 
@@ -166,7 +190,7 @@ export default async function HomePage() {
       )}
 
       {/* COLLECTIONS */}
-      <section className="bg-paper py-24 sm:py-32">
+      <section id="collections" className="scroll-mt-24 bg-paper py-24 sm:py-32">
         <div className="wrap">
           <p className="eyebrow">Catégories</p>
           <h2 className="mt-4">Nos collections</h2>

@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
   { href: "/properties", label: "Propriétés" },
-  { href: "/properties", label: "Collections" },
-  { href: "/team", label: "Team" },
-  { href: "/about", label: "À propos" },
+  { href: "/#collections", label: "Collections" },
   { href: "/guides", label: "Guides" },
+  { href: "/team", label: "Équipe" },
   { href: "/blog", label: "Blog" },
   { href: "/careers", label: "Carrières" },
+  { href: "/about#sell-with-us", label: "Confier un bien" },
 ];
 
 export function Header() {
@@ -26,7 +26,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/95 backdrop-blur">
-      <div className="wrap flex items-center justify-between py-5">
+      <div className="wrap flex items-center justify-between py-4">
         <Link href="/" className="shrink-0">
           <Image
             src="/logo/maison-fritz-logo.png"
