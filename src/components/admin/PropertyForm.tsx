@@ -1,5 +1,6 @@
 import type { Property } from "@/lib/queries/properties";
 import type { Agent } from "@/lib/queries/agents";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export function PropertyForm({
   action,
@@ -89,16 +90,11 @@ export function PropertyForm({
       </div>
 
       <div className="sm:col-span-2">
-        <label className="field-label" htmlFor="photo_urls">
-          Photos — une URL par ligne (la première sera la photo principale)
-        </label>
-        <textarea
-          id="photo_urls"
+        <ImageUploader
           name="photo_urls"
-          rows={5}
-          defaultValue={(photoUrls || []).join("\n")}
-          className="field-input"
-          placeholder="https://res.cloudinary.com/..."
+          label="Photos du bien"
+          initialUrls={photoUrls}
+          multiple
         />
       </div>
 

@@ -1,4 +1,5 @@
 import type { Agent } from "@/lib/queries/agents";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 export function AgentForm({
   action,
@@ -37,8 +38,11 @@ export function AgentForm({
       </div>
 
       <div className="sm:col-span-2">
-        <label className="field-label" htmlFor="photo_url">Photo (URL)</label>
-        <input id="photo_url" name="photo_url" defaultValue={agent?.photo_url || ""} className="field-input" />
+        <ImageUploader
+          name="photo_url"
+          label="Photo de l’agent"
+          initialUrls={agent?.photo_url ? [agent.photo_url] : []}
+        />
       </div>
 
       <div className="sm:col-span-2">
