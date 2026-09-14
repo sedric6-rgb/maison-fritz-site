@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Vraiment Riches Display";
+  src: url("/fonts/VraimentRichesDisplay.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-bg: #f6f2e9;
   --color-bg-alt: #eee7d6;
@@ -32,7 +40,7 @@
   --color-terracotta: var(--color-terracotta);
   --color-line: var(--color-line);
   --color-line-soft: var(--color-line-soft);
-  --font-display: "Fraunces", serif;
+  --font-display: "Vraiment Riches Display", "Work Sans", sans-serif;
   --font-sans: "Work Sans", sans-serif;
 }
 
@@ -56,9 +64,9 @@ html {
 
   h1, h2, h3 {
     font-family: var(--font-display);
-    font-weight: 500;
-    line-height: 1.06;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: 0.002em;
     color: var(--color-forest-deep);
   }
 
@@ -72,7 +80,6 @@ html {
 
   h3 {
     font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem);
-    font-weight: 600;
   }
 
   p {
@@ -125,9 +132,11 @@ html {
   }
 
   .eyebrow {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.02rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-ochre);
   }
 
