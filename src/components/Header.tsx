@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
@@ -26,8 +27,15 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/95 backdrop-blur">
       <div className="wrap flex items-center justify-between py-5">
-        <Link href="/" className="font-display text-2xl tracking-tight text-forest-deep">
-          Maison <span className="text-ochre">Fritz</span>
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/logo/maison-fritz-logo.png"
+            alt="Maison Fritz — Agence immobilière"
+            width={293}
+            height={100}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 text-[0.95rem] text-ink-soft lg:flex">

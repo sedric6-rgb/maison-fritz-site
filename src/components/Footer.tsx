@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const NAV_COLUMN: { href: string; label: string }[] = [
   { href: "/properties", label: "Propriétés" },
@@ -15,10 +16,14 @@ export function Footer() {
     <footer className="border-t border-line bg-paper">
       <div className="wrap grid gap-12 py-16 sm:grid-cols-3">
         <div>
-          <div className="font-display text-xl text-forest-deep">
-            Maison <span className="text-ochre">Fritz</span>
-          </div>
-          <p className="mt-3 max-w-xs text-sm text-ink-soft">
+          <Image
+            src="/logo/maison-fritz-logo.png"
+            alt="Maison Fritz — Agence immobilière"
+            width={293}
+            height={100}
+            className="h-10 w-auto"
+          />
+          <p className="mt-4 max-w-xs text-sm text-ink-soft">
             Immobilier premium au Congo — vente, location et gestion locative, pour les
             propriétaires du pays comme de la diaspora.
           </p>
