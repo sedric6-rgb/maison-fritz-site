@@ -39,11 +39,12 @@ export default async function AboutPage({
   const { sent, error } = await searchParams;
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <h1 className="text-4xl">À propos de Maison Fritz</h1>
+    <section className="py-16 sm:py-20">
+      <div className="wrap-text">
+        <p className="eyebrow">Maison Fritz</p>
+        <h1 className="mt-4">À propos</h1>
 
-        <nav className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-b border-line pb-6 text-sm text-ink-soft">
+        <nav className="mt-10 flex flex-wrap gap-x-7 gap-y-2 hairline border-b border-line pb-7 text-sm text-ink-soft">
           {SECTIONS.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="hover:text-forest-deep">
               {s.label}
@@ -51,10 +52,10 @@ export default async function AboutPage({
           ))}
         </nav>
 
-        <div className="mt-14 space-y-16">
+        <div className="mt-16 space-y-20">
           <div id="mission" className="scroll-mt-24">
-            <h2 className="text-2xl">Mission</h2>
-            <p className="mt-4 max-w-2xl text-ink-soft">
+            <h2>Mission</h2>
+            <p className="mt-5 text-ink-soft">
               Permettre à toute personne, où qu&apos;elle se trouve, de faire fructifier un bien
               immobilier au Congo en toute confiance — grâce à des mandats sécurisés
               juridiquement et un suivi transparent, sans avoir à être physiquement présente.
@@ -62,34 +63,34 @@ export default async function AboutPage({
           </div>
 
           <div id="vision" className="scroll-mt-24">
-            <h2 className="text-2xl">Vision</h2>
-            <p className="mt-4 max-w-2xl text-ink-soft">
+            <h2>Vision</h2>
+            <p className="mt-5 text-ink-soft">
               Devenir le réseau d&apos;agences immobilières de référence au Congo, reconnu pour
               son sérieux par la diaspora comme par les investisseurs locaux.
             </p>
           </div>
 
           <div id="valeurs" className="scroll-mt-24">
-            <h2 className="text-2xl">Valeurs</h2>
-            <ul className="mt-4 grid max-w-2xl gap-3 text-ink-soft sm:grid-cols-2">
-              <li className="border-l-2 border-terracotta pl-4">Transparence sur les mandats et les frais</li>
-              <li className="border-l-2 border-terracotta pl-4">Rigueur juridique à chaque étape</li>
-              <li className="border-l-2 border-terracotta pl-4">Un seul interlocuteur, du début à la fin</li>
-              <li className="border-l-2 border-terracotta pl-4">Respect des locataires comme des propriétaires</li>
+            <h2>Valeurs</h2>
+            <ul className="mt-6 grid gap-4 text-ink-soft sm:grid-cols-2">
+              <li className="border-l-2 border-ochre pl-4">Transparence sur les mandats et les frais</li>
+              <li className="border-l-2 border-ochre pl-4">Rigueur juridique à chaque étape</li>
+              <li className="border-l-2 border-ochre pl-4">Un seul interlocuteur, du début à la fin</li>
+              <li className="border-l-2 border-ochre pl-4">Respect des locataires comme des propriétaires</li>
             </ul>
           </div>
 
           <div id="ceo" className="scroll-mt-24">
-            <h2 className="text-2xl">CEO</h2>
-            <p className="mt-4 max-w-2xl text-ink-soft">
+            <h2>CEO</h2>
+            <p className="mt-5 text-ink-soft">
               Maison Fritz est fondée et dirigée par Fritz Mambouka, entrepreneur dans
               l&apos;immobilier et la construction au Congo et au Gabon.
             </p>
           </div>
 
           <div id="marketing" className="scroll-mt-24">
-            <h2 className="text-2xl">Marketing</h2>
-            <p className="mt-4 max-w-2xl text-ink-soft">
+            <h2>Marketing</h2>
+            <p className="mt-5 text-ink-soft">
               Le réseau Maison Fritz s&apos;appuie sur une présence digitale forte et sur le
               bouche-à-oreille de sa communauté de propriétaires et d&apos;investisseurs, en
               particulier au sein de la diaspora congolaise.
@@ -97,8 +98,8 @@ export default async function AboutPage({
           </div>
 
           <div id="histoire" className="scroll-mt-24">
-            <h2 className="text-2xl">Histoire</h2>
-            <p className="mt-4 max-w-2xl text-ink-soft">
+            <h2>Histoire</h2>
+            <p className="mt-5 text-ink-soft">
               Né d&apos;un constat simple — investir à distance dans l&apos;immobilier au Congo
               restait risqué faute de relais fiable — Maison Fritz se lance en phase 1 en
               novembre 2026 à Pointe-Noire et Brazzaville, avec un modèle de franchise inspiré
@@ -107,11 +108,11 @@ export default async function AboutPage({
           </div>
 
           <div id="faq" className="scroll-mt-24">
-            <h2 className="text-2xl">FAQ</h2>
-            <div className="mt-6 max-w-2xl divide-y divide-line">
+            <h2>FAQ</h2>
+            <div className="mt-7 divide-y divide-line">
               {FAQ.map((item) => (
-                <div key={item.q} className="py-4">
-                  <p className="font-semibold">{item.q}</p>
+                <div key={item.q} className="py-5">
+                  <p className="font-display text-lg text-forest-deep">{item.q}</p>
                   <p className="mt-2 text-sm text-ink-soft">{item.a}</p>
                 </div>
               ))}
@@ -119,26 +120,26 @@ export default async function AboutPage({
           </div>
 
           <div id="hq" className="scroll-mt-24">
-            <h2 className="text-2xl">HQ</h2>
-            <p className="mt-4 max-w-2xl text-ink-soft">
+            <h2>HQ</h2>
+            <p className="mt-5 text-ink-soft">
               Siège social à Pointe-Noire, Congo — bureau secondaire à Brazzaville.
             </p>
           </div>
 
-          <div id="sell-with-us" className="scroll-mt-24 rounded-sm border border-line bg-paper p-8">
-            <h2 className="text-2xl">Sell with us</h2>
-            <p className="mt-4 max-w-xl text-ink-soft">
+          <div id="sell-with-us" className="scroll-mt-24 border border-line bg-paper p-8 sm:p-10">
+            <h2>Sell with us</h2>
+            <p className="mt-5 max-w-xl text-ink-soft">
               Vous êtes déjà agent immobilier ? Rejoignez le réseau Maison Fritz : mandats
               standardisés, formation continue, redevance de réseau sans frais de démarrage
               caché.
             </p>
 
             {sent ? (
-              <p className="mt-6 max-w-md rounded-sm bg-forest/10 p-4 text-sm text-forest-deep">
+              <p className="mt-7 max-w-md bg-forest/10 p-4 text-sm text-forest-deep">
                 Votre candidature a bien été envoyée. Nous revenons vers vous rapidement.
               </p>
             ) : (
-              <form action={submitSellWithUs} className="mt-6 grid max-w-xl gap-4 sm:grid-cols-2">
+              <form action={submitSellWithUs} className="mt-7 grid max-w-xl gap-4 sm:grid-cols-2">
                 {error && (
                   <p className="sm:col-span-2 text-sm text-terracotta">
                     Merci d&apos;indiquer votre nom et un téléphone ou un email.

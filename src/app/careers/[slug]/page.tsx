@@ -17,25 +17,25 @@ export default async function JobDetailPage({
   if (!job) notFound();
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-3xl px-6 sm:px-8">
-        <h1 className="text-4xl">{job.title}</h1>
-        <p className="mt-2 text-ink-soft">
+    <section className="py-16 sm:py-20">
+      <div className="wrap-text">
+        <h1>{job.title}</h1>
+        <p className="mt-3 text-ink-soft">
           {[job.city, job.contract_type].filter(Boolean).join(" · ")}
         </p>
         {job.description && (
-          <div className="mt-8 whitespace-pre-line text-ink-soft">{job.description}</div>
+          <div className="mt-10 whitespace-pre-line text-ink-soft">{job.description}</div>
         )}
 
-        <div className="mt-12 border-t border-line pt-10">
-          <h2 className="text-2xl">Postuler</h2>
+        <div className="mt-16 hairline border-t border-line pt-12">
+          <h2>Postuler</h2>
 
           {sent ? (
-            <p className="mt-6 max-w-md rounded-sm bg-forest/10 p-4 text-sm text-forest-deep">
+            <p className="mt-7 max-w-md bg-forest/10 p-4 text-sm text-forest-deep">
               Votre candidature a bien été envoyée. Nous revenons vers vous rapidement.
             </p>
           ) : (
-            <form action={submitJobApplication} className="mt-6 grid max-w-xl gap-4 sm:grid-cols-2">
+            <form action={submitJobApplication} className="mt-7 grid max-w-xl gap-4 sm:grid-cols-2">
               <input type="hidden" name="job_id" value={job.id} />
               <input type="hidden" name="job_slug" value={job.slug} />
               {error && (

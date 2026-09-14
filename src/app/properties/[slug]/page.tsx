@@ -36,66 +36,62 @@ export default async function PropertyDetailPage({
   if (property.is_frontline_beach) tags.push("Frontline Beach");
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        {/* Photos */}
-        <div className="grid gap-3 sm:grid-cols-4">
-          <div className="aspect-[4/3] overflow-hidden rounded-sm bg-bg-alt sm:col-span-2 sm:row-span-2">
+    <section className="py-10 sm:py-14">
+      <div className="wrap">
+        {/* Galerie */}
+        <div className="grid gap-2 sm:grid-cols-4 sm:gap-3">
+          <div className="aspect-[4/3] overflow-hidden bg-bg-alt sm:col-span-2 sm:row-span-2">
             {photos[0] ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={photos[0].url} alt={property.title} className="h-full w-full object-cover" />
+              <img src={photos[0].url} alt={property.title} className="img-cover" />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-ink-soft">Pas de photo</div>
+              <div className="flex h-full w-full items-center justify-center text-ink-faint">Pas de photo</div>
             )}
           </div>
           {photos.slice(1, 5).map((photo) => (
-            <div key={photo.id} className="aspect-[4/3] overflow-hidden rounded-sm bg-bg-alt">
+            <div key={photo.id} className="aspect-[4/3] overflow-hidden bg-bg-alt">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={photo.url} alt={property.title} className="h-full w-full object-cover" />
+              <img src={photo.url} alt={property.title} className="img-cover" />
             </div>
           ))}
         </div>
 
-        <div className="mt-10 grid gap-12 lg:grid-cols-3">
+        <div className="mt-12 grid gap-14 lg:grid-cols-3">
           <div className="lg:col-span-2">
             {tags.length > 0 && (
-              <div className="mb-3 flex flex-wrap gap-2">
+              <div className="mb-4 flex flex-wrap gap-2">
                 {tags.map((tag) => (
-                  <span key={tag} className="rounded-full border border-ochre/40 px-2.5 py-0.5 text-xs text-ochre">
-                    {tag}
-                  </span>
+                  <span key={tag} className="tag">{tag}</span>
                 ))}
               </div>
             )}
-            <h1 className="text-3xl sm:text-4xl">{property.title}</h1>
-            <p className="mt-2 text-ink-soft">
+            <h1>{property.title}</h1>
+            <p className="mt-3 text-ink-soft">
               {property.neighborhood ? `${property.neighborhood}, ` : ""}
               {property.city}
             </p>
 
-            {/* Informations */}
-            <div className="mt-8 grid grid-cols-3 gap-4 border-y border-line py-6 text-center">
+            <div className="mt-10 grid grid-cols-3 gap-4 hairline border-b border-line py-7 text-center">
               <div>
                 <div className="font-display text-2xl text-forest-deep">{property.bedrooms}</div>
-                <div className="text-sm text-ink-soft">Chambres</div>
+                <div className="mt-1 text-sm text-ink-soft">Chambres</div>
               </div>
               <div>
                 <div className="font-display text-2xl text-forest-deep">{property.bathrooms}</div>
-                <div className="text-sm text-ink-soft">Salles de bain</div>
+                <div className="mt-1 text-sm text-ink-soft">Salles de bain</div>
               </div>
               <div>
                 <div className="font-display text-2xl text-forest-deep">{property.surface_m2} m²</div>
-                <div className="text-sm text-ink-soft">Surface</div>
+                <div className="mt-1 text-sm text-ink-soft">Surface</div>
               </div>
             </div>
 
             {property.description && (
-              <p className="mt-8 whitespace-pre-line text-ink-soft">{property.description}</p>
+              <p className="mt-10 whitespace-pre-line text-ink-soft">{property.description}</p>
             )}
 
-            {/* Vidéo */}
             {embedUrl && (
-              <div className="mt-8 aspect-video overflow-hidden rounded-sm">
+              <div className="mt-10 aspect-video overflow-hidden">
                 <iframe
                   src={embedUrl}
                   title={`Vidéo — ${property.title}`}
@@ -108,24 +104,24 @@ export default async function PropertyDetailPage({
 
           {/* Prix + contact agent */}
           <div>
-            <div className="rounded-sm border border-line bg-paper p-6">
+            <div className="border border-line bg-paper p-7">
               <p className="font-display text-2xl text-forest-deep">
                 {formatPrice(Number(property.price), property.listing_type)}
               </p>
               {agent && (
-                <div className="mt-4 border-t border-line pt-4">
+                <div className="mt-5 hairline pt-5">
                   <p className="text-sm text-ink-soft">Agent en charge</p>
-                  <p className="font-semibold">{agent.full_name}</p>
-                  {agent.phone && <p className="text-sm text-ink-soft">{agent.phone}</p>}
+                  <p className="mt-1 font-display text-lg text-forest-deep">{agent.full_name}</p>
+                  {agent.phone && <p className="mt-1 text-sm text-ink-soft">{agent.phone}</p>}
                 </div>
               )}
 
               {sent ? (
-                <p className="mt-6 rounded-sm bg-forest/10 p-4 text-sm text-forest-deep">
+                <p className="mt-7 bg-forest/10 p-4 text-sm text-forest-deep">
                   Votre demande a bien été envoyée. Un agent vous recontacte rapidement.
                 </p>
               ) : (
-                <form action={submitPropertyInquiry} className="mt-6 flex flex-col gap-4">
+                <form action={submitPropertyInquiry} className="mt-7 flex flex-col gap-4">
                   <input type="hidden" name="property_id" value={property.id} />
                   <input type="hidden" name="property_slug" value={property.slug} />
                   {error && (

@@ -19,17 +19,18 @@ const GUIDES = [
 
 export default function GuidesPage() {
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <h1 className="text-4xl">Guides</h1>
-        <p className="mt-4 max-w-xl text-ink-soft">
+    <section className="py-16 sm:py-20">
+      <div className="wrap">
+        <p className="eyebrow">Ressources</p>
+        <h1 className="mt-4">Guides</h1>
+        <p className="mt-4 max-w-lg text-ink-soft">
           Des repères pratiques pour investir, vendre ou louer sereinement au Congo.
         </p>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <div className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2">
           {GUIDES.map((g) => (
-            <div key={g.title} className="border border-line bg-paper p-6">
-              <h2 className="text-lg font-semibold">{g.title}</h2>
-              <p className="mt-2 text-sm text-ink-soft">{g.text}</p>
+            <div key={g.title} className="border-t border-forest pt-6">
+              <h3>{g.title}</h3>
+              <p className="mt-3 text-sm text-ink-soft">{g.text}</p>
             </div>
           ))}
         </div>

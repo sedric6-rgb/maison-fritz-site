@@ -10,17 +10,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound();
 
   return (
-    <article className="py-16">
-      <div className="mx-auto max-w-3xl px-6 sm:px-8">
-        <p className="text-sm text-ink-soft">{formatDate(post.published_at)}</p>
-        <h1 className="mt-2 text-4xl">{post.title}</h1>
+    <article className="py-16 sm:py-20">
+      <div className="wrap-text">
+        <p className="text-sm text-ink-faint">{formatDate(post.published_at)}</p>
+        <h1 className="mt-3">{post.title}</h1>
         {post.cover_image_url && (
-          <div className="mt-8 aspect-[16/9] w-full overflow-hidden rounded-sm bg-bg-alt">
+          <div className="mt-10 aspect-[16/9] w-full overflow-hidden bg-bg-alt">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={post.cover_image_url} alt={post.title} className="h-full w-full object-cover" />
+            <img src={post.cover_image_url} alt={post.title} className="img-cover" />
           </div>
         )}
-        <div className="mt-8 whitespace-pre-line text-ink-soft">{post.content}</div>
+        <div className="mt-10 whitespace-pre-line text-ink-soft">{post.content}</div>
       </div>
     </article>
   );

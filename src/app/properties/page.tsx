@@ -5,7 +5,7 @@ import { PropertyCard } from "@/components/PropertyCard";
 export const revalidate = 0;
 
 const TABS: { key: string; label: string }[] = [
-  { key: "", label: "Toutes les propriétés" },
+  { key: "", label: "Toutes" },
   { key: "exclusive", label: "Exclusives" },
   { key: "newly_built", label: "Newly Built" },
   { key: "frontline_beach", label: "Frontline Beach" },
@@ -36,9 +36,10 @@ export default async function PropertiesPage({
     listProperties({
       tag,
       city: params.city || undefined,
-      listingType: params.listingType === "vente" || params.listingType === "location"
-        ? params.listingType
-        : undefined,
+      listingType:
+        params.listingType === "vente" || params.listingType === "location"
+          ? params.listingType
+          : undefined,
       minPrice: params.minPrice ? Number(params.minPrice) : undefined,
       maxPrice: params.maxPrice ? Number(params.maxPrice) : undefined,
       bedrooms: params.bedrooms ? Number(params.bedrooms) : undefined,
@@ -46,25 +47,25 @@ export default async function PropertiesPage({
     listDistinctCities(),
   ]);
 
-  const photosByProperty = await Promise.all(
-    properties.map((p) => getPropertyPhotos(p.id))
-  );
+  const photosByProperty = await Promise.all(properties.map((p) => getPropertyPhotos(p.id)));
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <h1 className="text-4xl">Nos propriétés</h1>
+    <section className="py-16 sm:py-20">
+      <div className="wrap">
+        <p className="eyebrow">Le catalogue</p>
+        <h1 className="mt-4">Propriétés</h1>
+        <p className="mt-4 max-w-lg text-ink-soft">
+          Chaque bien présenté ici est vérifié par notre équipe avant sa mise en ligne.
+        </p>
 
-        <div className="mt-8 flex flex-wrap gap-2 border-b border-line pb-6">
+        <div className="mt-10 flex flex-wrap gap-6 hairline pb-8 text-sm">
           {TABS.map((t) => {
             const active = (params.tag || "") === t.key;
             return (
               <Link
                 key={t.key}
                 href={t.key ? `/properties?tag=${t.key}` : "/properties"}
-                className={`rounded-full px-4 py-2 text-sm ${
-                  active ? "bg-forest text-paper" : "border border-line text-ink-soft"
-                }`}
+                className={active ? "text-forest-deep underline underline-offset-8" : "text-ink-soft hover:text-forest-deep"}
               >
                 {t.label}
               </Link>
@@ -72,7 +73,7 @@ export default async function PropertiesPage({
           })}
         </div>
 
-        <form className="mt-8 grid gap-4 rounded-sm border border-line bg-paper p-6 sm:grid-cols-2 lg:grid-cols-5" method="get">
+        <form className="mt-8 grid gap-5 border border-line bg-paper p-6 sm:grid-cols-2 lg:grid-cols-5 sm:p-8" method="get">
           {tag && <input type="hidden" name="tag" value={tag} />}
           <div>
             <label className="field-label" htmlFor="city">Ville</label>
@@ -109,11 +110,11 @@ export default async function PropertiesPage({
         </form>
 
         {properties.length === 0 ? (
-          <p className="mt-16 text-center text-ink-soft">
+          <p className="mt-20 text-center text-ink-soft">
             Aucune propriété ne correspond à ces critères pour le moment.
           </p>
         ) : (
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             {properties.map((property, i) => (
               <PropertyCard key={property.id} property={property} coverUrl={photosByProperty[i][0]?.url} />
             ))}
