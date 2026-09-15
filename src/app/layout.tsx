@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Maison Fritz — Immobilier à Pointe-Noire et Brazzaville",
+  title: "Caixa Banque Pologne — Banque en ligne",
   description:
-    "Maison Fritz, franchise d'agences immobilières au Congo : vente, location et gestion locative sécurisées à Pointe-Noire et Brazzaville.",
+    "Caixa Banque Pologne : votre banque en ligne en Pologne. Comptes, épargne, crédits, cartes bancaires et services bancaires pour particuliers et professionnels.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -17,15 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="flex min-h-full flex-col bg-bg text-ink">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <body className="min-h-full bg-bg text-ink">{children}</body>
     </html>
   );
 }
