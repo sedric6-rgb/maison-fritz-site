@@ -22,11 +22,7 @@ export function formatDateTime(value: string | Date): string {
   }).format(date);
 }
 
-/**
- * Formate un montant avec sa devise (PLN par defaut).
- * Exemples : "12 847,53 PLN", "45 230,00 EUR"
- */
-export function formatCurrency(amount: number, currency: string = "PLN"): string {
+export function formatCurrency(amount: number, currency: string = "EUR"): string {
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency,
@@ -35,10 +31,6 @@ export function formatCurrency(amount: number, currency: string = "PLN"): string
   }).format(amount);
 }
 
-/**
- * Formate un IBAN en groupes de 4 caracteres pour l'affichage.
- * Exemple : "PL61109010140000071219812874" -> "PL61 1090 1014 0000 0712 1981 2874"
- */
 export function formatIBAN(iban: string): string {
   const cleaned = iban.replace(/\s/g, "");
   return cleaned.replace(/(.{4})/g, "$1 ").trim();

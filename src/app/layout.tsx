@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Caixa Banque Pologne — Banque en ligne",
+  title: "CaixaBank Luxembourg — Banque en ligne",
   description:
-    "Caixa Banque Pologne : votre banque en ligne en Pologne. Comptes, épargne, crédits, cartes bancaires et services bancaires pour particuliers et professionnels.",
+    "CaixaBank Luxembourg : votre banque en ligne au Luxembourg. Comptes, épargne, crédits, cartes bancaires et services bancaires pour particuliers et professionnels.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

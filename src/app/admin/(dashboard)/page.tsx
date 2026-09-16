@@ -32,9 +32,9 @@ export default async function AdminDashboard() {
             {[
               { action: "Nouveau client enregistré", detail: "Anna Nowak — CBP-384921", time: "Il y a 12 min" },
               { action: "Compte ouvert", detail: "Compte courant pour Piotr Wiśniewski", time: "Il y a 34 min" },
-              { action: "Crédit approuvé", detail: "Prêt immobilier 280 000 PLN — Kamil Wójcik", time: "Il y a 1h" },
+              { action: "Crédit approuvé", detail: "Prêt immobilier 280 000 EUR — Kamil Wójcik", time: "Il y a 1h" },
               { action: "Carte émise", detail: "Visa Gold *4827 pour Jan Kowalski", time: "Il y a 2h" },
-              { action: "Virement traité", detail: "15 000 PLN — Entreprise ABC → DEF Sp. z o.o.", time: "Il y a 3h" },
+              { action: "Virement traité", detail: "15 000 EUR — Entreprise ABC → DEF S.à r.l.", time: "Il y a 3h" },
             ].map((item, i) => (
               <div key={i} className="flex items-start justify-between py-2 border-b border-gray-100 last:border-0">
                 <div>

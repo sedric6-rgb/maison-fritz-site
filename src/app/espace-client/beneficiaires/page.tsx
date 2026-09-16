@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 const INITIAL = [
-  { id: 1, label: "Anna Kowalska", name: "Anna Kowalska", iban: "PL83 1020 1026 0000 0422 0000 1234", bic: "BPKOPLPW", favorite: true },
-  { id: 2, label: "Loyer appartement", name: "Immobiliare Sp. z o.o.", iban: "PL44 1160 2202 0000 0002 4447 1234", bic: "BIGBPLPW", favorite: true },
-  { id: 3, label: "Électricité PGE", name: "PGE Polska Grupa Energetyczna", iban: "PL92 1240 6247 1111 0010 4319 8745", bic: "PKOPPLPW", favorite: false },
+  { id: 1, label: "Anna Kowalska", name: "Anna Kowalska", iban: "LU83 0019 1026 0000 0422 0000 1234", bic: "CABORLUL", favorite: true },
+  { id: 2, label: "Loyer appartement", name: "Immobiliare S.à r.l.", iban: "LU44 0019 2202 0000 0002 4447 1234", bic: "BGLLLULL", favorite: true },
+  { id: 3, label: "Électricité Enovos", name: "Enovos Luxembourg S.A.", iban: "LU92 0019 6247 1111 0010 4319 8745", bic: "BILLLULL", favorite: false },
 ];
 
 export default function BeneficiairesPage() {
@@ -50,8 +50,8 @@ export default function BeneficiairesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Libellé</label><input name="label" required className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Nom du bénéficiaire</label><input name="name" required className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
-            <div><label className="block text-sm font-medium text-gray-700 mb-1">IBAN</label><input name="iban" required placeholder="PL..." className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
-            <div><label className="block text-sm font-medium text-gray-700 mb-1">BIC</label><input name="bic" placeholder="BPKOPLPW" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">IBAN</label><input name="iban" required placeholder="LU..." className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">BIC</label><input name="bic" placeholder="CABORLUL" className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" /></div>
           </div>
           <div className="flex gap-3"><button type="submit" className="bg-[#003d82] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[#002a5c]">Ajouter</button><button type="button" onClick={() => setShowForm(false)} className="text-sm text-gray-500 hover:text-gray-700">Annuler</button></div>
         </form>

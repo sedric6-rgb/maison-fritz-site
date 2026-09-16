@@ -10,28 +10,28 @@ export default function TarifsPage() {
 
       <div className="max-w-5xl mx-auto px-6 py-16 space-y-12">
         <Table title="Tarifs des comptes" headers={["Type de compte", "Frais mensuels", "Carte incluse", "Virements SEPA"]} rows={[
-          ["Compte Courant", "0 PLN", "Visa Débit", "Illimités gratuits"],
-          ["Livret Épargne", "0 PLN", "—", "—"],
-          ["Compte Professionnel", "29 PLN", "Visa Classic", "50 gratuits/mois"],
-          ["Compte Jeune (16-25 ans)", "0 PLN", "Visa Débit", "Illimités gratuits"],
+          ["Compte Courant", "0 EUR", "Visa Débit", "Illimités gratuits"],
+          ["Livret Épargne", "0 EUR", "—", "—"],
+          ["Compte Professionnel", "29 EUR", "Visa Classic", "50 gratuits/mois"],
+          ["Compte Jeune (16-25 ans)", "0 EUR", "Visa Débit", "Illimités gratuits"],
         ]} />
 
         <Table title="Tarifs des cartes" headers={["Type de carte", "Cotisation annuelle", "Plafond retrait/mois", "Plafond paiement/mois"]} rows={[
-          ["Visa Débit", "0 PLN", "2 000 PLN", "5 000 PLN"],
-          ["Visa Classic", "60 PLN", "3 000 PLN", "10 000 PLN"],
-          ["Visa Gold", "180 PLN", "5 000 PLN", "20 000 PLN"],
-          ["Visa Platinum", "480 PLN", "10 000 PLN", "50 000 PLN"],
+          ["Visa Débit", "0 EUR", "2 000 EUR", "5 000 EUR"],
+          ["Visa Classic", "60 EUR", "3 000 EUR", "10 000 EUR"],
+          ["Visa Gold", "180 EUR", "5 000 EUR", "20 000 EUR"],
+          ["Visa Platinum", "480 EUR", "10 000 EUR", "50 000 EUR"],
         ]} />
 
         <Table title="Tarifs des opérations" headers={["Opération", "Tarif"]} rows={[
           ["Virement SEPA (en ligne)", "Gratuit"],
-          ["Virement SEPA (en agence)", "5 PLN"],
+          ["Virement SEPA (en agence)", "5 EUR"],
           ["Virement instantané", "Gratuit"],
-          ["Virement international", "25 PLN"],
+          ["Virement international", "25 EUR"],
           ["Prélèvement automatique", "Gratuit"],
-          ["Retrait DAB Caixa", "Gratuit"],
-          ["Retrait DAB autre réseau", "5 PLN"],
-          ["Retrait à l'étranger", "2% (min. 10 PLN)"],
+          ["Retrait DAB CaixaBank", "Gratuit"],
+          ["Retrait DAB autre réseau", "5 EUR"],
+          ["Retrait à l'étranger", "2% (min. 10 EUR)"],
         ]} />
 
         <Table title="Taux d'intérêt" headers={["Produit", "Taux"]} rows={[
@@ -44,7 +44,7 @@ export default function TarifsPage() {
         ]} />
 
         <p className="text-xs text-gray-400 text-center max-w-2xl mx-auto">
-          Les taux et tarifs indiqués sont valables au 1er septembre 2024 et susceptibles de modification. Consultez nos conditions générales pour plus de détails. Caixa Banque Pologne S.A. est un établissement de crédit agréé par la KNF.
+          Les taux et tarifs indiqués sont valables au 1er septembre 2024 et susceptibles de modification. Consultez nos conditions générales pour plus de détails. CaixaBank Luxembourg S.A. est un établissement de crédit agréé par la CSSF.
         </p>
       </div>
     </div>

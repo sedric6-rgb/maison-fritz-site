@@ -1,8 +1,8 @@
 const BRANCHES = [
-  { city: "Varsovie Centre", address: "ul. Marszałkowska 100, 00-001 Varsovie", phone: "+48 22 100 00 00", hours: "Lun-Ven 8h-18h, Sam 9h-13h", hq: true },
-  { city: "Cracovie", address: "ul. Floriańska 25, 31-019 Cracovie", phone: "+48 12 200 00 00", hours: "Lun-Ven 8h30-17h30", hq: false },
-  { city: "Gdańsk", address: "ul. Długa 45, 80-831 Gdańsk", phone: "+48 58 300 00 00", hours: "Lun-Ven 9h-17h", hq: false },
-  { city: "Wrocław", address: "Rynek 12, 50-101 Wrocław", phone: "+48 71 400 00 00", hours: "Lun-Ven 8h30-17h30", hq: false },
+  { city: "Luxembourg-Gare", address: "6 Av. de la Liberté, 1930 Luxembourg", phone: "+352 26 00 00 00", hours: "Lun-Ven 8h-18h, Sam 9h-13h", hq: true },
+  { city: "Kirchberg", address: "2 Rue Edward Steichen, 2540 Luxembourg", phone: "+352 26 00 00 10", hours: "Lun-Ven 8h30-17h30", hq: false },
+  { city: "Esch-sur-Alzette", address: "28 Rue de l'Alzette, 4010 Esch-sur-Alzette", phone: "+352 26 00 00 20", hours: "Lun-Ven 9h-17h", hq: false },
+  { city: "Ettelbruck", address: "15 Grand-Rue, 9050 Ettelbruck", phone: "+352 26 00 00 30", hours: "Lun-Ven 8h30-17h30", hq: false },
 ];
 
 export default function AgencesPage() {
@@ -11,7 +11,7 @@ export default function AgencesPage() {
       <section className="bg-gradient-to-r from-[#001f42] to-[#003d82] text-white py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h1 className="text-4xl font-bold mb-4">Nos agences</h1>
-          <p className="text-blue-200 text-lg">Retrouvez-nous dans les principales villes de Pologne</p>
+          <p className="text-blue-200 text-lg">Retrouvez-nous dans les principales villes du Luxembourg</p>
         </div>
       </section>
 

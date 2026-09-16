@@ -4,26 +4,26 @@ const SERVICES = [
   {
     title: "Comptes bancaires",
     items: [
-      { name: "Compte Courant", desc: "Votre compte du quotidien avec carte Visa incluse, virements SEPA illimités et appli mobile.", price: "0 PLN/mois" },
+      { name: "Compte Courant", desc: "Votre compte du quotidien avec carte Visa incluse, virements SEPA illimités et appli mobile.", price: "0 EUR/mois" },
       { name: "Livret Épargne", desc: "Épargnez à votre rythme avec un taux attractif de 3,25% et des fonds disponibles à tout moment.", price: "Gratuit" },
-      { name: "Compte Professionnel", desc: "Dédié aux entrepreneurs : encaissements, terminal de paiement, comptabilité intégrée.", price: "29 PLN/mois" },
-      { name: "Compte Jeune", desc: "Pour les 16-25 ans : carte gratuite, cashback et appli dédiée.", price: "0 PLN/mois" },
+      { name: "Compte Professionnel", desc: "Dédié aux entrepreneurs : encaissements, terminal de paiement, comptabilité intégrée.", price: "29 EUR/mois" },
+      { name: "Compte Jeune", desc: "Pour les 16-25 ans : carte gratuite, cashback et appli dédiée.", price: "0 EUR/mois" },
     ],
   },
   {
     title: "Cartes bancaires",
     items: [
-      { name: "Visa Débit", desc: "Paiements et retraits dans le monde entier, sans contact, Apple Pay et Google Pay.", price: "0 PLN/an" },
-      { name: "Visa Classic", desc: "Assurances voyages incluses, plafonds relevés et service d'assistance 24/7.", price: "60 PLN/an" },
-      { name: "Visa Gold", desc: "Carte premium avec conciergerie, assurances étendues et accès aux salons d'aéroport.", price: "180 PLN/an" },
-      { name: "Visa Platinum", desc: "Notre carte la plus exclusive : plafonds élevés, services VIP et avantages partenaires.", price: "480 PLN/an" },
+      { name: "Visa Débit", desc: "Paiements et retraits dans le monde entier, sans contact, Apple Pay et Google Pay.", price: "0 EUR/an" },
+      { name: "Visa Classic", desc: "Assurances voyages incluses, plafonds relevés et service d'assistance 24/7.", price: "60 EUR/an" },
+      { name: "Visa Gold", desc: "Carte premium avec conciergerie, assurances étendues et accès aux salons d'aéroport.", price: "180 EUR/an" },
+      { name: "Visa Platinum", desc: "Notre carte la plus exclusive : plafonds élevés, services VIP et avantages partenaires.", price: "480 EUR/an" },
     ],
   },
   {
     title: "Crédits & Prêts",
     items: [
       { name: "Prêt Immobilier", desc: "Financez votre bien immobilier avec des taux compétitifs à partir de 3,45% TAEG.", price: "Dès 3,45%" },
-      { name: "Crédit Consommation", desc: "Réalisez vos projets personnels avec un crédit flexible jusqu'à 100 000 PLN.", price: "Dès 5,80%" },
+      { name: "Crédit Consommation", desc: "Réalisez vos projets personnels avec un crédit flexible jusqu'à 100 000 EUR.", price: "Dès 5,80%" },
       { name: "Crédit Auto", desc: "Achetez votre véhicule neuf ou d'occasion avec un financement adapté.", price: "Dès 4,30%" },
       { name: "Crédit Étudiant", desc: "Financez vos études avec un taux préférentiel et un différé de remboursement.", price: "Dès 2,00%" },
     ],
@@ -32,7 +32,7 @@ const SERVICES = [
     title: "Services digitaux",
     items: [
       { name: "Application mobile", desc: "Gérez vos comptes, effectuez des virements et suivez vos dépenses depuis votre smartphone.", price: "Gratuit" },
-      { name: "Virements instantanés", desc: "Transférez de l'argent en temps réel, 24h/24 et 7j/7, en zone SEPA.", price: "0 PLN" },
+      { name: "Virements instantanés", desc: "Transférez de l'argent en temps réel, 24h/24 et 7j/7, en zone SEPA.", price: "0 EUR" },
       { name: "Apple Pay & Google Pay", desc: "Payez sans contact avec votre téléphone ou montre connectée.", price: "Inclus" },
       { name: "Notifications en temps réel", desc: "Recevez une alerte instantanée pour chaque opération sur votre compte.", price: "Inclus" },
     ],

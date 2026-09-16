@@ -33,7 +33,7 @@ export default function NewClientPage() {
             <Field label="Prénom" name="first_name" required />
             <Field label="Nom" name="last_name" required />
             <Field label="Date de naissance" name="dob" type="date" required />
-            <Field label="Nationalité" name="nationality" defaultValue="Polonaise" />
+            <Field label="Nationalité" name="nationality" defaultValue="Luxembourgeoise" />
           </div>
         </Section>
 
@@ -54,11 +54,11 @@ export default function NewClientPage() {
         <Section title="Coordonnées">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Field label="Email" name="email" type="email" required />
-            <Field label="Téléphone" name="phone" type="tel" placeholder="+48 ..." required />
+            <Field label="Téléphone" name="phone" type="tel" placeholder="+352 ..." required />
             <div className="sm:col-span-2"><Field label="Adresse" name="address" required /></div>
             <Field label="Ville" name="city" required />
             <Field label="Code postal" name="postal_code" required />
-            <Field label="Pays" name="country" defaultValue="Pologne" />
+            <Field label="Pays" name="country" defaultValue="Luxembourg" />
           </div>
         </Section>
 

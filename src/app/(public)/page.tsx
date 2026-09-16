@@ -114,14 +114,14 @@ const ADVANTAGES = [
   {
     icon: <IconTransparent />,
     title: "Frais transparents",
-    desc: "Aucun frais cache. Nos tarifs sont clairs, publics et parmi les plus competitifs du marche polonais.",
+    desc: "Aucun frais cache. Nos tarifs sont clairs, publics et parmi les plus competitifs du marche luxembourgeois.",
   },
 ];
 
 const RATES = [
   { label: "Livret Epargne", value: "3,25 %", note: "taux annuel brut" },
   { label: "Pret immobilier", value: "a partir de 3,45 %", note: "TAEG fixe" },
-  { label: "Compte courant", value: "0 PLN/mois", note: "sans conditions" },
+  { label: "Compte courant", value: "0 EUR/mois", note: "sans conditions" },
 ];
 
 /* ---------- page ---------- */
@@ -146,7 +146,7 @@ export default function HomePage() {
           <div>
             <h1 className="text-white">Votre banque, simplement.</h1>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/80">
-              Decouvrez une experience bancaire moderne en Pologne. Comptes, epargne, credits et cartes
+              Decouvrez une experience bancaire moderne au Luxembourg. Comptes, epargne, credits et cartes
               - tout ce dont vous avez besoin, accessible en quelques clics.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -166,16 +166,16 @@ export default function HomePage() {
                 <span className="text-sm font-medium text-white/70">Compte courant</span>
                 <span className="badge bg-green-500/20 text-green-300">Actif</span>
               </div>
-              <p className="text-3xl font-bold tracking-tight">12 450,00 PLN</p>
-              <p className="mt-1 text-sm text-white/50">PL61 1090 1014 0000 0712 1981 2874</p>
+              <p className="text-3xl font-bold tracking-tight">12 450,00 EUR</p>
+              <p className="mt-1 text-sm text-white/50">LU61 0019 1014 0000 0712 1981 2874</p>
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <div className="rounded-lg bg-white/5 p-3">
                   <p className="text-xs text-white/50">Entrees ce mois</p>
-                  <p className="mt-1 text-sm font-semibold text-green-300">+ 8 200 PLN</p>
+                  <p className="mt-1 text-sm font-semibold text-green-300">+ 8 200 EUR</p>
                 </div>
                 <div className="rounded-lg bg-white/5 p-3">
                   <p className="text-xs text-white/50">Sorties ce mois</p>
-                  <p className="mt-1 text-sm font-semibold text-red-300">- 3 750 PLN</p>
+                  <p className="mt-1 text-sm font-semibold text-red-300">- 3 750 EUR</p>
                 </div>
               </div>
               <div className="mt-6 flex gap-3">
@@ -219,7 +219,7 @@ export default function HomePage() {
       {/* ========== WHY CHOOSE US ========== */}
       <section className="bg-bg-alt py-20">
         <div className="wrap">
-          <h2 className="text-center">Pourquoi choisir Caixa Banque Pologne ?</h2>
+          <h2 className="text-center">Pourquoi choisir CaixaBank Luxembourg ?</h2>
 
           <div className="mt-14 grid gap-8 sm:grid-cols-3">
             {ADVANTAGES.map((a) => (

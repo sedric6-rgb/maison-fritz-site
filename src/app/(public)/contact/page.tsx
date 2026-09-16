@@ -25,7 +25,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                <input type="tel" placeholder="+48 ..." className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <input type="tel" placeholder="+352 ..." className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Sujet</label>
@@ -50,16 +50,16 @@ export default function ContactPage() {
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Nos coordonnées</h2>
               <div className="space-y-4">
-                <ContactInfo icon="phone" label="Téléphone" value="+48 22 100 00 00" sub="Lun-Ven 8h-20h, Sam 9h-14h" />
-                <ContactInfo icon="mail" label="Email" value="contact@caixabanque.pl" />
-                <ContactInfo icon="location" label="Siège social" value="ul. Marszałkowska 100" sub="00-001 Varsovie, Pologne" />
+                <ContactInfo icon="phone" label="Téléphone" value="+352 26 00 00 00" sub="Lun-Ven 8h-20h, Sam 9h-14h" />
+                <ContactInfo icon="mail" label="Email" value="contact@caixabank.lu" />
+                <ContactInfo icon="location" label="Siège social" value="6 Av. de la Liberté" sub="1930 Luxembourg-Gare, Luxembourg" />
               </div>
             </div>
 
             <div className="bg-blue-50 rounded-xl p-6">
               <h3 className="font-semibold text-gray-900 mb-2">Service d&apos;urgence carte</h3>
               <p className="text-sm text-gray-600 mb-3">Carte perdue ou volée ? Appelez immédiatement :</p>
-              <p className="text-lg font-bold text-[#003d82]">+48 22 100 00 01</p>
+              <p className="text-lg font-bold text-[#003d82]">+352 26 00 00 01</p>
               <p className="text-xs text-gray-500 mt-1">Disponible 24h/24, 7j/7</p>
             </div>
 

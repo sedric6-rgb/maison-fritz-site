@@ -13,6 +13,7 @@ const NAV = [
   { href: "/admin/transactions", label: "Transactions", icon: "arrows" },
   { href: "/admin/cartes", label: "Cartes", icon: "card" },
   { href: "/admin/prets", label: "Crédits & Prêts", icon: "loan" },
+  { href: "/admin/prelevements", label: "Prélèvements", icon: "debit" },
 ];
 
 export default async function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -27,8 +28,8 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
       <aside className="hidden lg:flex lg:flex-col w-[260px] bg-[#001f42] text-gray-300 fixed inset-y-0 left-0 z-30">
         <div className="p-6 border-b border-white/10">
           <Link href="/admin" className="block">
-            <span className="text-lg font-bold text-white">Caixa</span>{" "}
-            <span className="text-sm text-blue-300">Banque Pologne</span>
+            <img src="/logo/caixabank-logo.jpg" alt="CaixaBank" className="h-7 w-auto mb-1" />
+            <span className="text-sm font-bold text-white">CaixaBank Luxembourg</span>
           </Link>
           <p className="text-xs text-blue-400 mt-1">Administration</p>
         </div>
@@ -61,7 +62,7 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
 
       <div className="flex-1 lg:ml-[260px]">
         <header className="sticky top-0 z-20 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-          <h2 className="text-sm font-medium text-gray-500">Administration Caixa Banque Pologne</h2>
+          <h2 className="text-sm font-medium text-gray-500">Administration CaixaBank Luxembourg</h2>
           <span className="text-sm text-gray-400">{new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</span>
         </header>
         <div className="p-6">{children}</div>
@@ -78,6 +79,7 @@ function NavIcon({ name }: { name: string }) {
     case "arrows": return <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 7l4-4 4 4M5 11l4 4 4-4"/></svg>;
     case "card": return <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="14" height="11" rx="2"/><path d="M2 8h14"/></svg>;
     case "loan": return <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="currentColor" strokeWidth="1.5"><circle cx="9" cy="9" r="7"/><path d="M9 5v8M7 7c0-.6.9-1 2-1s2 .4 2 1-.9 1-2 1-2 .4-2 1 .9 1 2 1 2-.4 2-1"/></svg>;
+    case "debit": return <svg width="18" height="18" fill="none" viewBox="0 0 18 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M3 9h12M12 5l4 4-4 4"/><path d="M15 14H5a2 2 0 01-2-2V6"/></svg>;
     default: return null;
   }
 }

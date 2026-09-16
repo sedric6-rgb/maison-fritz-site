@@ -26,9 +26,9 @@ export function BankHeader() {
     <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
       <div className="wrap flex items-center justify-between py-3">
         {/* Logo */}
-        <Link href="/" className="shrink-0 flex items-center gap-1">
-          <span className="text-xl font-bold text-primary sm:text-2xl">Caixa</span>
-          <span className="text-lg font-normal text-ink-soft sm:text-xl">Banque Pologne</span>
+        <Link href="/" className="shrink-0 flex items-center gap-2">
+          <img src="/logo/caixabank-logo.jpg" alt="CaixaBank" className="h-8 w-auto" />
+          <span className="text-lg font-bold text-primary sm:text-xl">CaixaBank Luxembourg</span>
         </Link>
 
         {/* Desktop nav */}

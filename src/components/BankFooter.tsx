@@ -66,7 +66,7 @@ export function BankFooter() {
       <div className="border-t border-white/10">
         <div className="wrap py-6">
           <div className="flex flex-col gap-4 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
-            <span>&copy; 2024 Caixa Banque Pologne. Tous droits reserves.</span>
+            <span>&copy; 2024 CaixaBank Luxembourg S.A. Tous droits reserves.</span>
             <div className="flex flex-wrap gap-4">
               <Link href="/mentions-legales" className="hover:text-white">Mentions legales</Link>
               <span className="text-white/20">|</span>
@@ -76,8 +76,9 @@ export function BankFooter() {
             </div>
           </div>
           <p className="mt-4 text-[0.7rem] leading-relaxed text-white/35">
-            Caixa Banque Pologne S.A. - Etablissement de credit agree par la KNF (Komisja Nadzoru Finansowego).
-            Membre du Fonds de Garantie Bancaire (Bankowy Fundusz Gwarancyjny).
+            CaixaBank Luxembourg S.A. — Etablissement de credit agree par la CSSF (Commission de Surveillance du Secteur Financier).
+            Membre du Fonds de Garantie des Depots Luxembourg (FGDL).
+            Siege social : 6 Av. de la Liberte, 1930 Luxembourg-Gare.
             Etablissement soumis a la reglementation bancaire de l&apos;Union europeenne.
           </p>
         </div>
