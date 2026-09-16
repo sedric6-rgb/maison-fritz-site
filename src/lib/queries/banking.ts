@@ -567,6 +567,7 @@ export async function getClientById(
   clientId: number
 ): Promise<BankClient | null> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, client_number, first_name, last_name, email, phone,
               date_of_birth, address, city, postal_code, country, status
@@ -588,6 +589,7 @@ export async function getClientAccounts(
   clientId: number
 ): Promise<BankAccount[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, account_number, client_id, account_type, label,
               balance, currency, status
@@ -607,6 +609,7 @@ export async function getAccountById(
   accountId: number
 ): Promise<BankAccount | null> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, account_number, client_id, account_type, label,
               balance, currency, status
@@ -628,6 +631,7 @@ export async function getAccountTransactions(
   limit: number = 50
 ): Promise<BankTransaction[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, account_id, type, category, amount, balance_after,
               description, counterparty, reference, executed_at
@@ -651,6 +655,7 @@ export async function getAccountTransactions(
  */
 export async function getClientCards(clientId: number): Promise<BankCard[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, account_id, client_id, card_number_last4, card_type,
               expiry_date, status, monthly_limit, contactless_enabled,
@@ -669,6 +674,7 @@ export async function getClientCards(clientId: number): Promise<BankCard[]> {
  */
 export async function getClientLoans(clientId: number): Promise<BankLoan[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, client_id, loan_type, amount, interest_rate,
               duration_months, monthly_payment, remaining_amount,
@@ -689,6 +695,7 @@ export async function getClientBeneficiaries(
   clientId: number
 ): Promise<BankBeneficiary[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, client_id, label, beneficiary_name, iban, bic, is_favorite
        FROM bank_beneficiaries WHERE client_id = ?
@@ -708,6 +715,7 @@ export async function getClientMessages(
   clientId: number
 ): Promise<BankMessage[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, client_id, subject, body, sender, is_read, created_at
        FROM bank_messages WHERE client_id = ?
@@ -727,6 +735,7 @@ export async function getClientNotifications(
   clientId: number
 ): Promise<BankNotification[]> {
   try {
+    if (!db) throw new Error("no db");
     const [rows] = await db.query<RowDataPacket[]>(
       `SELECT id, client_id, title, message, type, is_read, created_at
        FROM bank_notifications WHERE client_id = ?
@@ -744,6 +753,7 @@ export async function getClientNotifications(
  */
 export async function getDashboardStats(): Promise<DashboardStats> {
   try {
+    if (!db) throw new Error("no db");
     const [[clientRow]] = await db.query<RowDataPacket[]>(
       "SELECT COUNT(*) as total FROM bank_clients"
     );

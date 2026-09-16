@@ -29,30 +29,29 @@ export async function clientLoginAction(formData: FormData): Promise<void> {
 
   let clientId: number | null = null;
 
-  // Tenter d'abord la verification en base de donnees
-  try {
-    const [rows] = await db.query<RowDataPacket[]>(
-      `SELECT id, password_hash FROM bank_clients
-       WHERE client_number = ? AND status = 'actif'`,
-      [clientNumber]
-    );
+  if (db) {
+    try {
+      const [rows] = await db.query<RowDataPacket[]>(
+        `SELECT id, password_hash FROM bank_clients
+         WHERE client_number = ? AND status = 'actif'`,
+        [clientNumber]
+      );
 
-    if (rows.length > 0) {
-      const client = rows[0] as { id: number; password_hash: string };
-      // En production, utiliser bcrypt.compare ici.
-      // Pour le moment, comparaison directe du hash ou du demo.
-      const crypto = await import("crypto");
-      const inputHash = crypto
-        .createHash("sha256")
-        .update(password)
-        .digest("hex");
+      if (rows.length > 0) {
+        const client = rows[0] as { id: number; password_hash: string };
+        const crypto = await import("crypto");
+        const inputHash = crypto
+          .createHash("sha256")
+          .update(password)
+          .digest("hex");
 
-      if (client.password_hash === inputHash) {
-        clientId = client.id;
+        if (client.password_hash === inputHash) {
+          clientId = client.id;
+        }
       }
+    } catch {
+      // Base de donnees indisponible, verifier les identifiants demo
     }
-  } catch {
-    // Base de donnees indisponible, verifier les identifiants demo
   }
 
   // Fallback : identifiants de demonstration
