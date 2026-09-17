@@ -7,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 const NAV = [
   { href: "/admin", label: "Tableau de bord" },
+  { href: "/admin/crm-hub", label: "CRM Hub", accent: true },
   { href: "/admin/properties", label: "Propriétés" },
   { href: "/admin/agents", label: "Agents" },
   { href: "/admin/blog", label: "Blog" },
@@ -28,7 +29,11 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-sm px-3 py-2 text-ink-soft hover:bg-paper hover:text-forest-deep"
+              className={`rounded-sm px-3 py-2 ${
+                "accent" in item && item.accent
+                  ? "font-semibold text-ochre hover:bg-paper hover:text-ochre"
+                  : "text-ink-soft hover:bg-paper hover:text-forest-deep"
+              }`}
             >
               {item.label}
             </Link>
