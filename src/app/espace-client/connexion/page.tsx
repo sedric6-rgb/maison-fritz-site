@@ -19,6 +19,13 @@ export default async function ClientLoginPage({ searchParams }: { searchParams: 
           <h1 className="text-xl font-bold text-gray-900 mb-1">Connexion</h1>
           <p className="text-sm text-gray-500 mb-6">Accédez à vos comptes en ligne</p>
 
+          {error === "blocked" && (
+            <div className="mb-4 p-4 rounded-lg bg-red-50 border border-red-200">
+              <p className="text-sm font-semibold text-red-700 mb-1">Accès suspendu</p>
+              <p className="text-sm text-red-600">Votre accès à l'espace client a été temporairement restreint. Veuillez contacter votre conseiller bancaire pour plus d'informations.</p>
+              <p className="text-xs text-red-500 mt-2">CaixaBank Luxembourg — Service Clientèle : +352 26 20 26 20</p>
+            </div>
+          )}
           {error === "invalid" && (
             <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200">
               <p className="text-sm text-red-600">Numéro client ou mot de passe incorrect.</p>

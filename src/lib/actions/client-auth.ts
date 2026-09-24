@@ -7,6 +7,7 @@ import {
   createClientSessionToken,
   CLIENT_SESSION_COOKIE_NAME,
 } from "@/lib/auth-client";
+import { isClientBlocked } from "@/lib/blocked-clients";
 import type { RowDataPacket } from "mysql2";
 
 // Identifiants de demonstration
@@ -65,6 +66,10 @@ export async function clientLoginAction(formData: FormData): Promise<void> {
 
   if (clientId === null) {
     redirect("/espace-client/connexion?error=invalid");
+  }
+
+  if (isClientBlocked(clientId)) {
+    redirect("/espace-client/connexion?error=blocked");
   }
 
   const session = createClientSessionToken(clientId);

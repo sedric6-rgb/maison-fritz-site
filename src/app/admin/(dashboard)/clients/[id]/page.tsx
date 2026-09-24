@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { blockClientAction, unblockClientAction } from "@/lib/actions/client-block";
 
 const INIT_CLIENT = {
   id: 1, client_number: "CBP-284751", first_name: "Jan", last_name: "Kowalski",
@@ -38,6 +39,8 @@ export default function ClientDetailPage() {
   const [txOpen, setTxOpen] = useState(false);
   const [toast, setToast] = useState("");
 
+  const [isPending, startTransition] = useTransition();
+
   const notify = (msg: string) => { setToast(msg); setTimeout(() => setToast(""), 3000); };
 
   const saveEdit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,9 +61,18 @@ export default function ClientDetailPage() {
   };
 
   const toggleBlock = () => {
-    setClient((prev) => ({ ...prev, status: prev.status === "actif" ? "bloqué" : "actif" }));
-    notify(client.status === "actif" ? "Client bloqué" : "Client réactivé");
+    const wasActive = client.status === "actif";
+    setClient((prev) => ({ ...prev, status: wasActive ? "bloqué" : "actif" }));
     setConfirmBlock(false);
+    startTransition(async () => {
+      if (wasActive) {
+        await blockClientAction(client.id);
+        notify("Client bloqué — l'accès à l'espace client est suspendu");
+      } else {
+        await unblockClientAction(client.id);
+        notify("Client réactivé — l'accès est rétabli");
+      }
+    });
   };
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -237,7 +249,7 @@ export default function ClientDetailPage() {
       {confirmBlock && (
         <Modal onClose={() => setConfirmBlock(false)}>
           <h2 className="text-lg font-bold text-gray-900 mb-2">{client.status === "actif" ? "Bloquer ce client ?" : "Réactiver ce client ?"}</h2>
-          <p className="text-sm text-gray-500 mb-6">{client.status === "actif" ? "Le client ne pourra plus accéder à son espace en ligne ni utiliser ses cartes." : "Le client retrouvera l'accès à tous ses services."}</p>
+          <p className="text-sm text-gray-500 mb-6">{client.status === "actif" ? "Le client ne pourra plus accéder à son espace en ligne. Un message « Contactez votre conseiller » lui sera affiché à la connexion." : "Le client retrouvera l'accès à tous ses services."}</p>
           <div className="flex gap-3">
             <button onClick={toggleBlock} className={`flex-1 py-2.5 rounded-lg text-sm font-medium text-white ${client.status === "actif" ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}`}>Confirmer</button>
             <button onClick={() => setConfirmBlock(false)} className="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-200">Annuler</button>

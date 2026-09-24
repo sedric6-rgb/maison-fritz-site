@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getClientSession } from "@/lib/auth-client";
 import { getClientById } from "@/lib/queries/banking";
 import { clientLogoutAction } from "@/lib/actions/client-auth";
+import { isClientBlocked } from "@/lib/blocked-clients";
 
 const NAV = [
   { href: "/espace-client", label: "Tableau de bord", icon: "dashboard" },
@@ -24,6 +25,10 @@ export default async function EspaceClientLayout({ children }: { children: React
 
   if (!session) {
     redirect("/espace-client/connexion");
+  }
+
+  if (isClientBlocked(session.clientId)) {
+    redirect("/espace-client/connexion?error=blocked");
   }
 
   const client = await getClientById(session.clientId);
