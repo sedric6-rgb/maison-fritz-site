@@ -68,7 +68,7 @@ export async function clientLoginAction(formData: FormData): Promise<void> {
     redirect("/espace-client/connexion?error=invalid");
   }
 
-  if (isClientBlocked(clientId)) {
+  if (await isClientBlocked(clientId)) {
     redirect("/espace-client/connexion?error=blocked");
   }
 

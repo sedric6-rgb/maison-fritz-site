@@ -27,7 +27,7 @@ export default async function EspaceClientLayout({ children }: { children: React
     redirect("/espace-client/connexion");
   }
 
-  if (isClientBlocked(session.clientId)) {
+  if (await isClientBlocked(session.clientId)) {
     redirect("/espace-client/connexion?error=blocked");
   }
 
