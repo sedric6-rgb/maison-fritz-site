@@ -8,7 +8,7 @@ export async function blockClientAction(
   clientId: number
 ): Promise<{ success: boolean }> {
   await requireAdmin();
-  setClientBlocked(clientId, true);
+  await setClientBlocked(clientId, true);
   revalidatePath("/admin/clients", "layout");
   revalidatePath("/espace-client", "layout");
   return { success: true };
@@ -18,7 +18,7 @@ export async function unblockClientAction(
   clientId: number
 ): Promise<{ success: boolean }> {
   await requireAdmin();
-  setClientBlocked(clientId, false);
+  await setClientBlocked(clientId, false);
   revalidatePath("/admin/clients", "layout");
   revalidatePath("/espace-client", "layout");
   return { success: true };
@@ -28,5 +28,5 @@ export async function getClientBlockedStatus(
   clientId: number
 ): Promise<boolean> {
   await requireAdmin();
-  return isClientBlocked(clientId);
+  return await isClientBlocked(clientId);
 }
