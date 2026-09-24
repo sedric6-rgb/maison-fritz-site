@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "./admin-guard";
-import { setClientBlocked } from "@/lib/blocked-clients";
+import { setClientBlocked, isClientBlocked } from "@/lib/blocked-clients";
 
 export async function blockClientAction(
   clientId: number
@@ -22,4 +22,11 @@ export async function unblockClientAction(
   revalidatePath("/admin/clients", "layout");
   revalidatePath("/espace-client", "layout");
   return { success: true };
+}
+
+export async function getClientBlockedStatus(
+  clientId: number
+): Promise<boolean> {
+  await requireAdmin();
+  return isClientBlocked(clientId);
 }
