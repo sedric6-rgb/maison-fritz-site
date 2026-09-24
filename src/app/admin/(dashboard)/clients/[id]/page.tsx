@@ -35,7 +35,6 @@ export default function ClientDetailPage() {
   const [client, setClient] = useState(INIT_CLIENT);
   const [editing, setEditing] = useState(false);
   const [msgOpen, setMsgOpen] = useState(false);
-  const [confirmBlock, setConfirmBlock] = useState(false);
   const [txOpen, setTxOpen] = useState(false);
   const [toast, setToast] = useState("");
 
@@ -68,8 +67,11 @@ export default function ClientDetailPage() {
 
   const toggleBlock = () => {
     const wasActive = client.status === "actif";
+    const msg = wasActive
+      ? "Bloquer ce client ?\n\nLe client ne pourra plus accéder à son espace en ligne. Un message « Contactez votre conseiller » lui sera affiché à la connexion."
+      : "Réactiver ce client ?\n\nLe client retrouvera l'accès à tous ses services.";
+    if (!confirm(msg)) return;
     setClient((prev) => ({ ...prev, status: wasActive ? "bloqué" : "actif" }));
-    setConfirmBlock(false);
     startTransition(async () => {
       if (wasActive) {
         await blockClientAction(client.id);
@@ -148,7 +150,7 @@ export default function ClientDetailPage() {
             <button onClick={() => setEditing(true)} className="w-full text-left px-4 py-2.5 rounded-lg border border-gray-200 text-sm text-gray-700 hover:bg-gray-50">Modifier le profil</button>
             <button onClick={() => setMsgOpen(true)} className="w-full text-left px-4 py-2.5 rounded-lg border border-gray-200 text-sm text-gray-700 hover:bg-gray-50">Envoyer un message</button>
             <button onClick={() => setTxOpen(true)} className="w-full text-left px-4 py-2.5 rounded-lg border border-gray-200 text-sm text-[#003d82] hover:bg-blue-50">Nouvelle transaction</button>
-            <button onClick={() => setConfirmBlock(true)} className={`w-full text-left px-4 py-2.5 rounded-lg border text-sm ${client.status === "actif" ? "border-red-200 text-red-600 hover:bg-red-50" : "border-green-200 text-green-600 hover:bg-green-50"}`}>
+            <button onClick={toggleBlock} className={`w-full text-left px-4 py-2.5 rounded-lg border text-sm ${client.status === "actif" ? "border-red-200 text-red-600 hover:bg-red-50" : "border-green-200 text-green-600 hover:bg-green-50"}`}>
               {client.status === "actif" ? "Bloquer le client" : "Réactiver le client"}
             </button>
           </div>
@@ -252,16 +254,6 @@ export default function ClientDetailPage() {
         </Modal>
       )}
 
-      {confirmBlock && (
-        <Modal onClose={() => setConfirmBlock(false)}>
-          <h2 className="text-lg font-bold text-gray-900 mb-2">{client.status === "actif" ? "Bloquer ce client ?" : "Réactiver ce client ?"}</h2>
-          <p className="text-sm text-gray-500 mb-6">{client.status === "actif" ? "Le client ne pourra plus accéder à son espace en ligne. Un message « Contactez votre conseiller » lui sera affiché à la connexion." : "Le client retrouvera l'accès à tous ses services."}</p>
-          <div className="flex gap-3">
-            <button onClick={toggleBlock} className={`flex-1 py-2.5 rounded-lg text-sm font-medium text-white ${client.status === "actif" ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}`}>Confirmer</button>
-            <button onClick={() => setConfirmBlock(false)} className="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-200">Annuler</button>
-          </div>
-        </Modal>
-      )}
     </div>
   );
 }
