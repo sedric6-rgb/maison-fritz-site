@@ -11,19 +11,24 @@ function createPool(): mysql.Pool | null {
 
   if (!url && !host) return null;
 
-  if (url) {
-    return mysql.createPool(url);
-  }
+  try {
+    if (url) {
+      return mysql.createPool(url);
+    }
 
-  return mysql.createPool({
-    host,
-    port: Number(process.env.MYSQLPORT) || 3306,
-    user: process.env.MYSQLUSER || "root",
-    password: process.env.MYSQLPASSWORD || "",
-    database: process.env.MYSQLDATABASE || "maison_fritz",
-    waitForConnections: true,
-    connectionLimit: 10,
-  });
+    return mysql.createPool({
+      host,
+      port: Number(process.env.MYSQLPORT) || 3306,
+      user: process.env.MYSQLUSER || "root",
+      password: process.env.MYSQLPASSWORD || "",
+      database: process.env.MYSQLDATABASE || "railway",
+      waitForConnections: true,
+      connectionLimit: 10,
+    });
+  } catch {
+    console.error("[db] Failed to create MySQL pool");
+    return null;
+  }
 }
 
 export const db = globalForDb.mysqlPool ?? createPool();
