@@ -253,7 +253,6 @@ export default function ClientDetailPage() {
           </form>
         </Modal>
       )}
-
     </div>
   );
 }
