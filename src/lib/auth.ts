@@ -37,8 +37,8 @@ export function isValidSessionToken(token: string | undefined): boolean {
 }
 
 export function checkAdminPassword(password: string): boolean {
-  const expected = process.env.ADMIN_PASSWORD || "admin2024";
-  const a = Buffer.from(password);
+  const expected = (process.env.ADMIN_PASSWORD || "").trim() || "admin2024";
+  const a = Buffer.from(password.trim());
   const b = Buffer.from(expected);
   if (a.length !== b.length) return false;
   return crypto.timingSafeEqual(a, b);

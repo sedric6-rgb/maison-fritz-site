@@ -31,6 +31,7 @@ export default async function AdminLoginPage({
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">Mot de passe</label>
               <input id="password" name="password" type="password" required
+                autoCapitalize="none" autoCorrect="off" spellCheck={false} autoComplete="current-password"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <button type="submit" className="w-full bg-[#003d82] text-white py-3 rounded-lg font-medium hover:bg-[#002a5c] transition-colors">
