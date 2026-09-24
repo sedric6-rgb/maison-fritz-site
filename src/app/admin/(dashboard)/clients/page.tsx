@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { db } from "@/lib/db";
+import type { RowDataPacket } from "mysql2";
+
+export const dynamic = "force-dynamic";
 
 const DEMO_CLIENTS = [
   { id: 1, client_number: "CBP-284751", name: "Jan Kowalski", email: "jan.kowalski@email.pl", phone: "+48 612 345 678", status: "actif", created: "15/03/2022" },
@@ -20,6 +24,7 @@ const STATUS_STYLES: Record<string, string> = {
   actif: "bg-green-100 text-green-700",
   en_attente: "bg-yellow-100 text-yellow-700",
   bloque: "bg-red-100 text-red-700",
+  "bloqué": "bg-red-100 text-red-700",
   inactif: "bg-gray-100 text-gray-500",
 };
 
@@ -27,16 +32,34 @@ const STATUS_LABELS: Record<string, string> = {
   actif: "Actif",
   en_attente: "En attente",
   bloque: "Bloqué",
+  "bloqué": "Bloqué",
   inactif: "Inactif",
 };
 
-export default function AdminClientsPage() {
+async function getClients() {
+  try {
+    if (!db) throw new Error("no db");
+    const [rows] = await db.query<RowDataPacket[]>(
+      `SELECT id, client_number, CONCAT(first_name, ' ', last_name) as name,
+              email, phone, status, DATE_FORMAT(created_at, '%d/%m/%Y') as created
+       FROM bank_clients ORDER BY id`
+    );
+    if (rows.length > 0) return rows as typeof DEMO_CLIENTS;
+  } catch {
+    // DB unavailable — fall back to demo data
+  }
+  return DEMO_CLIENTS;
+}
+
+export default async function AdminClientsPage() {
+  const clients = await getClients();
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
-          <p className="text-sm text-gray-500 mt-1">{DEMO_CLIENTS.length} clients enregistrés</p>
+          <p className="text-sm text-gray-500 mt-1">{clients.length} clients enregistrés</p>
         </div>
         <Link href="/admin/clients/new" className="inline-flex items-center gap-2 bg-[#003d82] text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-[#002a5c] transition-colors">
           <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
@@ -59,15 +82,15 @@ export default function AdminClientsPage() {
               </tr>
             </thead>
             <tbody>
-              {DEMO_CLIENTS.map((client) => (
+              {clients.map((client) => (
                 <tr key={client.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3 font-mono text-xs text-gray-600">{client.client_number}</td>
                   <td className="px-4 py-3 font-medium text-gray-900">{client.name}</td>
                   <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{client.email}</td>
                   <td className="px-4 py-3 text-gray-500 hidden lg:table-cell">{client.phone}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[client.status]}`}>
-                      {STATUS_LABELS[client.status]}
+                    <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[client.status] || "bg-gray-100 text-gray-500"}`}>
+                      {STATUS_LABELS[client.status] || client.status}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">{client.created}</td>
