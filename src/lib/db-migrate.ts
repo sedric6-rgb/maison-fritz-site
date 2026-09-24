@@ -10,6 +10,7 @@ export async function runMigrations() {
     const [tables] = await db.query("SHOW TABLES");
     if (Array.isArray(tables) && tables.length > 0) {
       await addNewClients();
+      await runOnce("2026-09-block-davin-servais", blockDavinAndServais);
       return;
     }
 
@@ -228,6 +229,7 @@ export async function runMigrations() {
     );
 
     console.log("[db-migrate] Tables created and demo data inserted");
+    await runOnce("2026-09-block-davin-servais", blockDavinAndServais);
   } catch (err) {
     console.error("[db-migrate] Migration failed:", err);
     migrated.done = false;
@@ -273,4 +275,34 @@ async function addNewClients() {
   } catch (err) {
     console.error("[db-migrate] addNewClients failed:", err);
   }
+}
+
+// Recorded in app_migrations so an admin can reactivate the account afterwards without it being re-blocked on restart.
+async function runOnce(name: string, fn: () => Promise<void>) {
+  if (!db) return;
+  try {
+    await db.query(
+      `CREATE TABLE IF NOT EXISTS app_migrations (
+        name VARCHAR(100) PRIMARY KEY,
+        ran_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )`
+    );
+    const [rows] = await db.query<import("mysql2").RowDataPacket[]>(
+      "SELECT name FROM app_migrations WHERE name = ?",
+      [name]
+    );
+    if (rows.length > 0) return;
+    await fn();
+    await db.query("INSERT IGNORE INTO app_migrations (name) VALUES (?)", [name]);
+  } catch (err) {
+    console.error(`[db-migrate] ${name} failed:`, err);
+  }
+}
+
+async function blockDavinAndServais() {
+  if (!db) return;
+  const [res] = await db.query<import("mysql2").ResultSetHeader>(
+    "UPDATE bank_clients SET status = 'bloqué' WHERE client_number IN ('CBP-628471', 'CBP-847362')"
+  );
+  console.log(`[db-migrate] Davin et Servais bloqués (${res.affectedRows} comptes)`);
 }
