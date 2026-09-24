@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useTransition } from "react";
-import { blockClientAction, unblockClientAction } from "@/lib/actions/client-block";
+import { useState, useTransition, useEffect } from "react";
+import { blockClientAction, unblockClientAction, getClientBlockedStatus } from "@/lib/actions/client-block";
 
 const INIT_CLIENT = {
   id: 1, client_number: "CBP-284751", first_name: "Jan", last_name: "Kowalski",
@@ -40,6 +40,12 @@ export default function ClientDetailPage() {
   const [toast, setToast] = useState("");
 
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    getClientBlockedStatus(client.id).then((blocked) => {
+      if (blocked) setClient((prev) => ({ ...prev, status: "bloqué" }));
+    }).catch(() => {});
+  }, [client.id]);
 
   const notify = (msg: string) => { setToast(msg); setTimeout(() => setToast(""), 3000); };
 
