@@ -11,10 +11,11 @@ const INITIAL_LOANS = [
   { id: 6, client: "Michał Zieliński", type: "Étudiant", amount: 8000, rate: "2,00%", duration: "2 ans", status: "en_cours", date: "01/10/2023" },
   { id: 7, client: "Agnieszka Szymańska", type: "Consommation", amount: 25000, rate: "5,80%", duration: "4 ans", status: "refuse", date: "12/07/2024" },
   { id: 8, client: "Magdalena Lewandowska", type: "Auto", amount: 60000, rate: "4,30%", duration: "5 ans", status: "demande", date: "08/09/2024" },
+  { id: 9, client: "Servais Mampouya Mafoua", type: "Immobilier", amount: 420000, rate: "3,80%", duration: "20 ans", status: "annule", date: "01/02/2024" },
 ];
 
-const S: Record<string, string> = { en_cours: "bg-green-100 text-green-700", demande: "bg-yellow-100 text-yellow-700", approuve: "bg-blue-100 text-blue-700", refuse: "bg-red-100 text-red-700" };
-const SL: Record<string, string> = { en_cours: "En cours", demande: "Demande", approuve: "Approuvé", refuse: "Refusé" };
+const S: Record<string, string> = { en_cours: "bg-green-100 text-green-700", demande: "bg-yellow-100 text-yellow-700", approuve: "bg-blue-100 text-blue-700", refuse: "bg-red-100 text-red-700", annule: "bg-gray-100 text-gray-500" };
+const SL: Record<string, string> = { en_cours: "En cours", demande: "Demande", approuve: "Approuvé", refuse: "Refusé", annule: "Annulé" };
 const RATES: Record<string, string> = { Immobilier: "3,45%", Consommation: "5,80%", Auto: "4,30%", Étudiant: "2,00%", Professionnel: "4,10%" };
 
 export default function AdminPretsPage() {
