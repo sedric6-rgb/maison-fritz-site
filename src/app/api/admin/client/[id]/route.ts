@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getClientById, getClientAccounts, getClientCards, getAccountTransactions } from "@/lib/queries/banking";
+import { isValidSessionToken, SESSION_COOKIE_NAME } from "@/lib/auth";
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!isValidSessionToken(req.cookies.get(SESSION_COOKIE_NAME)?.value)) {
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
   const clientId = Number(id);
   if (!clientId) return NextResponse.json({ error: "invalid id" }, { status: 400 });
