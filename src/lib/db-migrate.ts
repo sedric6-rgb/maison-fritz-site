@@ -8,7 +8,10 @@ export async function runMigrations() {
 
   try {
     const [tables] = await db.query("SHOW TABLES");
-    if (Array.isArray(tables) && tables.length > 0) return;
+    if (Array.isArray(tables) && tables.length > 0) {
+      await addNewClients();
+      return;
+    }
 
     await db.query(`
       CREATE TABLE IF NOT EXISTS bank_clients (
@@ -228,5 +231,46 @@ export async function runMigrations() {
   } catch (err) {
     console.error("[db-migrate] Migration failed:", err);
     migrated.done = false;
+  }
+}
+
+async function addNewClients() {
+  if (!db) return;
+  try {
+    const [rows] = await db.query<import("mysql2").RowDataPacket[]>(
+      "SELECT id FROM bank_clients WHERE id = 9"
+    );
+    if (Array.isArray(rows) && rows.length > 0) return;
+
+    const PW_FRANCE24 = "135caeea8bbfe54d73e80c4295a69928827d8105280ce4e151cfe20fbeed106b";
+    const PW_AZERTY = "c5f2a1578ecb06ef525576e3750e238f7ffea194a59dcf8a65c6a695163d6a64";
+
+    await db.query(
+      `INSERT INTO bank_clients (id, client_number, first_name, last_name, email, phone, date_of_birth, address, city, postal_code, country, status, password_hash, created_at) VALUES
+      (9, 'CBP-291847', 'Fritz', 'Mambouka', 'fritz.mambouka@email.lu', '+352 621 987 321', '1980-06-12', '25 Av. Monterey', 'Luxembourg', '2163', 'Luxembourg', 'actif', ?, '2023-06-12'),
+      (10, 'CBP-384756', 'Cedric', 'Carpentier', 'cedric.carpentier@email.lu', '+352 621 456 789', '1987-09-25', '8 Rue de Hollerich', 'Luxembourg', '1740', 'Luxembourg', 'actif', ?, '2023-09-25'),
+      (11, 'CBP-573829', 'François', 'Martelly', 'francois.martelly@email.lu', '+352 621 654 321', '1975-12-03', '14 Bd de la Petrusse', 'Luxembourg', '2320', 'Luxembourg', 'actif', ?, '2022-12-03'),
+      (12, 'CBP-628471', 'André Claude Davin', 'Obame', 'acd.obame@email.lu', '+352 621 112 233', '1983-04-18', '6 Rue du Fort Neipperg', 'Luxembourg', '2230', 'Luxembourg', 'bloqué', ?, '2024-01-15'),
+      (13, 'CBP-847362', 'Servais', 'Mampouya Mafoua', 's.mampouya@email.lu', '+352 621 998 877', '1979-08-30', '19 Rue de Bonnevoie', 'Luxembourg', '1260', 'Luxembourg', 'bloqué', ?, '2023-03-20')`,
+      [PW_AZERTY, PW_FRANCE24, PW_FRANCE24, PW_FRANCE24, PW_FRANCE24]
+    );
+
+    await db.query(
+      `INSERT INTO bank_accounts (id, account_number, client_id, account_type, label, balance, currency, status) VALUES
+      (4, 'LU42 0019 3847 0000 1234 5678 9013', 9, 'courant', 'Compte Courant', 8920.75, 'EUR', 'actif'),
+      (5, 'LU53 0019 4821 0000 2345 6789 0124', 10, 'courant', 'Compte Courant', 15340.00, 'EUR', 'actif'),
+      (6, 'LU64 0019 5738 0000 3456 7890 1235', 11, 'courant', 'Compte Courant', 22150.80, 'EUR', 'actif'),
+      (7, 'LU75 0019 6284 0000 4567 8901 2346', 12, 'courant', 'Compte Courant', 6780.45, 'EUR', 'actif'),
+      (8, 'LU86 0019 7362 0000 5678 9012 3457', 13, 'courant', 'Compte Courant', 34520.00, 'EUR', 'actif')`
+    );
+
+    await db.query(
+      `INSERT INTO bank_loans (id, client_id, loan_type, amount, interest_rate, duration_months, monthly_payment, remaining_amount, status, start_date, end_date) VALUES
+      (2, 13, 'immobilier', 420000.00, 3.80, 240, 2487.50, 420000.00, 'annule', '2024-02-01', '2044-02-01')`
+    );
+
+    console.log("[db-migrate] 5 new clients added, Servais/Davin blocked, Servais loan cancelled");
+  } catch (err) {
+    console.error("[db-migrate] addNewClients failed:", err);
   }
 }
