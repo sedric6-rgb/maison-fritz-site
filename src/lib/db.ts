@@ -31,3 +31,7 @@ export const db = globalForDb.mysqlPool ?? createPool();
 if (process.env.NODE_ENV !== "production") {
   globalForDb.mysqlPool = db;
 }
+
+if (db) {
+  import("@/lib/db-migrate").then((m) => m.runMigrations()).catch(() => {});
+}
