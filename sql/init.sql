@@ -118,6 +118,8 @@ CREATE TABLE IF NOT EXISTS bank_notifications (
 -- ============================================================
 
 -- Mot de passe : demo2024 (SHA-256)
+-- Mot de passe : France24 (SHA-256) = 135caeea...
+-- Mot de passe : Azerty31@ (SHA-256) = c5f2a157...
 INSERT INTO bank_clients (id, client_number, first_name, last_name, email, phone, date_of_birth, address, city, postal_code, country, status, password_hash, created_at) VALUES
 (1, 'CBP-284751', 'Jan', 'Kowalski', 'jan.kowalski@email.lu', '+352 621 345 678', '1985-03-15', '12 Av. de la Gare', 'Luxembourg', '1611', 'Luxembourg', 'actif', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2022-03-15'),
 (2, 'CBP-384921', 'Anna', 'Nowak', 'anna.nowak@email.pl', '+48 501 234 567', '1990-07-22', '5 Rue de Strasbourg', 'Luxembourg', '2561', 'Luxembourg', 'actif', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2023-07-22'),
@@ -126,13 +128,23 @@ INSERT INTO bank_clients (id, client_number, first_name, last_name, email, phone
 (5, 'CBP-847291', 'Tomasz', 'Kamiński', 't.kaminski@email.pl', '+48 601 987 654', '1982-05-18', '15 Rue du Fort Thüngen', 'Luxembourg', '1499', 'Luxembourg', 'actif', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2023-05-18'),
 (6, 'CBP-629184', 'Magdalena', 'Lewandowska', 'm.lewandowska@email.pl', '+48 789 012 345', '1988-11-03', '3 Place de Clairefontaine', 'Luxembourg', '1341', 'Luxembourg', 'bloqué', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2022-11-03'),
 (7, 'CBP-418293', 'Michał', 'Zieliński', 'm.zielinski@email.pl', '+48 660 543 210', '1993-04-27', '10 Rue Aldringen', 'Luxembourg', '1118', 'Luxembourg', 'actif', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2024-04-27'),
-(8, 'CBP-739182', 'Agnieszka', 'Szymańska', 'a.szymanska@email.pl', '+48 510 678 901', '1991-02-14', '7 Rue Philippe II', 'Luxembourg', '2340', 'Luxembourg', 'actif', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2023-02-14');
+(8, 'CBP-739182', 'Agnieszka', 'Szymańska', 'a.szymanska@email.pl', '+48 510 678 901', '1991-02-14', '7 Rue Philippe II', 'Luxembourg', '2340', 'Luxembourg', 'actif', '3fb59388d9fcc5f7b965bc0f1747bea74c0f59102e733e1a7279911899e2879b', '2023-02-14'),
+(9, 'CBP-291847', 'Fritz', 'Mambouka', 'fritz.mambouka@email.lu', '+352 621 987 321', '1980-06-12', '25 Av. Monterey', 'Luxembourg', '2163', 'Luxembourg', 'actif', 'c5f2a1578ecb06ef525576e3750e238f7ffea194a59dcf8a65c6a695163d6a64', '2023-06-12'),
+(10, 'CBP-384756', 'Cedric', 'Carpentier', 'cedric.carpentier@email.lu', '+352 621 456 789', '1987-09-25', '8 Rue de Hollerich', 'Luxembourg', '1740', 'Luxembourg', 'actif', '135caeea8bbfe54d73e80c4295a69928827d8105280ce4e151cfe20fbeed106b', '2023-09-25'),
+(11, 'CBP-573829', 'François', 'Martelly', 'francois.martelly@email.lu', '+352 621 654 321', '1975-12-03', '14 Bd de la Petrusse', 'Luxembourg', '2320', 'Luxembourg', 'actif', '135caeea8bbfe54d73e80c4295a69928827d8105280ce4e151cfe20fbeed106b', '2022-12-03'),
+(12, 'CBP-628471', 'André Claude Davin', 'Obame', 'acd.obame@email.lu', '+352 621 112 233', '1983-04-18', '6 Rue du Fort Neipperg', 'Luxembourg', '2230', 'Luxembourg', 'bloqué', '135caeea8bbfe54d73e80c4295a69928827d8105280ce4e151cfe20fbeed106b', '2024-01-15'),
+(13, 'CBP-847362', 'Servais', 'Mampouya Mafoua', 's.mampouya@email.lu', '+352 621 998 877', '1979-08-30', '19 Rue de Bonnevoie', 'Luxembourg', '1260', 'Luxembourg', 'bloqué', '135caeea8bbfe54d73e80c4295a69928827d8105280ce4e151cfe20fbeed106b', '2023-03-20');
 
--- Comptes bancaires (client 1)
+-- Comptes bancaires
 INSERT INTO bank_accounts (id, account_number, client_id, account_type, label, balance, currency, status) VALUES
 (1, 'LU61 0019 1014 0000 0712 1981 2874', 1, 'courant', 'Compte Courant', 12847.53, 'EUR', 'actif'),
 (2, 'LU27 0019 2004 0000 3002 0135 5387', 1, 'epargne', 'Livret Epargne', 45230.00, 'EUR', 'actif'),
-(3, 'LU10 0019 0099 7603 1234 5678 9012', 1, 'professionnel', 'Compte Pro', 89415.22, 'EUR', 'actif');
+(3, 'LU10 0019 0099 7603 1234 5678 9012', 1, 'professionnel', 'Compte Pro', 89415.22, 'EUR', 'actif'),
+(4, 'LU42 0019 3847 0000 1234 5678 9013', 9, 'courant', 'Compte Courant', 8920.75, 'EUR', 'actif'),
+(5, 'LU53 0019 4821 0000 2345 6789 0124', 10, 'courant', 'Compte Courant', 15340.00, 'EUR', 'actif'),
+(6, 'LU64 0019 5738 0000 3456 7890 1235', 11, 'courant', 'Compte Courant', 22150.80, 'EUR', 'actif'),
+(7, 'LU75 0019 6284 0000 4567 8901 2346', 12, 'courant', 'Compte Courant', 6780.45, 'EUR', 'actif'),
+(8, 'LU86 0019 7362 0000 5678 9012 3457', 13, 'courant', 'Compte Courant', 34520.00, 'EUR', 'actif');
 
 -- Transactions (compte courant, client 1)
 INSERT INTO bank_transactions (id, account_id, type, category, amount, balance_after, description, counterparty, reference, executed_at) VALUES
@@ -162,9 +174,10 @@ INSERT INTO bank_cards (id, account_id, client_id, card_number_last4, card_type,
 (1, 1, 1, '4827', 'visa_gold',  '2027-09-30', 'active', 5000.00, 1, 1),
 (2, 1, 1, '9153', 'visa_debit', '2028-03-31', 'active', 2000.00, 1, 1);
 
--- Prêt immobilier (client 1)
+-- Prêts
 INSERT INTO bank_loans (id, client_id, loan_type, amount, interest_rate, duration_months, monthly_payment, remaining_amount, status, start_date, end_date) VALUES
-(1, 1, 'immobilier', 350000.00, 3.45, 300, 1567.23, 312450.00, 'en_cours', '2022-06-01', '2047-06-01');
+(1, 1, 'immobilier', 350000.00, 3.45, 300, 1567.23, 312450.00, 'en_cours', '2022-06-01', '2047-06-01'),
+(2, 13, 'immobilier', 420000.00, 3.80, 240, 2487.50, 420000.00, 'annule', '2024-02-01', '2044-02-01');
 
 -- Bénéficiaires (client 1)
 INSERT INTO bank_beneficiaries (id, client_id, label, beneficiary_name, iban, bic, is_favorite) VALUES

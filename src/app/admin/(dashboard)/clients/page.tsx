@@ -9,6 +9,11 @@ const DEMO_CLIENTS = [
   { id: 6, client_number: "CBP-629184", name: "Magdalena Lewandowska", email: "m.lewandowska@email.pl", phone: "+48 789 012 345", status: "bloque", created: "03/11/2022" },
   { id: 7, client_number: "CBP-418293", name: "Michał Zieliński", email: "m.zielinski@email.pl", phone: "+48 660 543 210", status: "actif", created: "27/04/2024" },
   { id: 8, client_number: "CBP-739182", name: "Agnieszka Szymańska", email: "a.szymanska@email.pl", phone: "+48 510 678 901", status: "actif", created: "14/02/2023" },
+  { id: 9, client_number: "CBP-291847", name: "Fritz Mambouka", email: "fritz.mambouka@email.lu", phone: "+352 621 987 321", status: "actif", created: "12/06/2023" },
+  { id: 10, client_number: "CBP-384756", name: "Cedric Carpentier", email: "cedric.carpentier@email.lu", phone: "+352 621 456 789", status: "actif", created: "25/09/2023" },
+  { id: 11, client_number: "CBP-573829", name: "François Martelly", email: "francois.martelly@email.lu", phone: "+352 621 654 321", status: "actif", created: "03/12/2022" },
+  { id: 12, client_number: "CBP-628471", name: "André Claude Davin Obame", email: "acd.obame@email.lu", phone: "+352 621 112 233", status: "bloque", created: "15/01/2024" },
+  { id: 13, client_number: "CBP-847362", name: "Servais Mampouya Mafoua", email: "s.mampouya@email.lu", phone: "+352 621 998 877", status: "bloque", created: "20/03/2023" },
 ];
 
 const STATUS_STYLES: Record<string, string> = {
